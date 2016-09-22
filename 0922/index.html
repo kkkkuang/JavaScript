@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/ajax.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		
+			setInterval(function(){
+				ajax({
+					method:"GET",
+					anysc:true,
+					url:"http://10.2.159.2:8080/ajax/chat",
+					data:{type:"query"},
+					success:function(str){
+						console.log(str);
+					}
+				});
+			},1000);
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

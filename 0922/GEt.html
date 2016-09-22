@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/ajax.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		// getData: 获取最新数据
+//    参数： isSend  true 代表发送，否则为定时获取
+function getData(isSend){
+	ajax({
+		method:"GET",
+		url:"http://10.2.159.2:8080/ajax/chat",
+		data:{type:"query"},
+		success:function(str){
+			var arr=JSON.parse(str);
+			var oUl=document.getElementById("list");
+			oUl.innerHTML="";
+			for(var i in arr){
+				var oLi=document.creatElement("li");
+				var oSpan=document.creatElement("span");
+				oSpan.innerHTML += "["+arr[i].name+"]"; 
+				oSpan.innerHTML += arr[i].content;
+				oLi.appendChild(oSpan);
+				oUl.appendChild(oLi);
+				if (isSend) {
+					// 让当前 li 滚动到视图中
+					oLi.scrollIntoView();
+				}
+			}
+		}
+	}),
+}
+window.onload=function(){
+	var user=prompt("输入你的名字")
+	setInterval(function(){
+		getData()
+	},1000);
+}
+
+/*function getData(isSend) {
+
+	// 【练习1】使用ajax获取数据
+	ajax({
+		method: "GET",
+		// 获取数据的接口地址
+		url: "http://10.2.159.2:8080/ajax/chat",
+		// 接口的参数，由服务器规定
+		data: {type: "query"},
+		success: function(str) {
+			// document.write(str);
+			
+			// 将json字符串转换成 js 中的数组(object)
+			var arr = JSON.parse(str);
+			
+			// 获取ul节点对象
+			var oUl = document.getElementById("list");
+			
+			// 清空 ul 中的内容。因为 服务器中获取的数据是全部数据，所以需要清空后再添加
+			oUl.innerHTML = "";
+			
+			for (var i = 0; i < arr.length; i++) {
+				// arr[i] 是一个对象
+				
+//				<li>
+//					<span>[laowang]:你也好</span>
+//				</li>
+				// 创建 li
+				var oLi = document.createElement("li");
+				var oSpan = document.createElement("span");
+				
+				oSpan.innerHTML += "["+arr[i].name+"]"; 
+				oSpan.innerHTML += arr[i].content;
+				
+				oLi.appendChild(oSpan);
+				oUl.appendChild(oLi);
+				
+				// 说明当前是点击发送按钮之后，调用的getData函数
+				if (isSend) {
+					// 让当前 li 滚动到视图中
+					oLi.scrollIntoView();
+				}
+			}
+		}
+	});
+}	
+
+//getData();
+
+onload = function() {
+	
+	// 获取输入框中的姓名
+	var sUser = window.prompt("好汉，请留下你的大名！");
+	
+	
+	// 创建定时器，用于自动获取最新聊天记录
+	
+	setInterval(function(){
+		getData();
+	}, 1000);
+	
+	// 发送按钮的事件处理函数
+	
+	var oBtn = document.getElementById("send");
+	
+	// 输入框节点
+	var oTxt = document.getElementById("txt");
+	
+	oBtn.onclick = function() {
+		
+		// 获取输入框中的内容
+		var s = oTxt.value;
+		
+		if (s == "") {
+			return ;
+		}
+		
+		// 点击发送后，立马清空输入框
+		oTxt.value = "";
+		
+		ajax({
+			method: "GET",
+			url: "http://10.2.159.18:8080/ajax/chat",
+			data: {type:"send", sender: sUser, msg: s},
+			success: function() {
+				// 发送成功，相当于发送结束
+				getData(true);
+				
+				// 找 ul 中最后的那条 li 中
+//				var oUl = document.getElementById("list");
+//				var allLi = oUl.getElementsByTagName("li");
+//				allLi[ allLi.length-1 ].scrollIntoView();
+
+				//oUl.lastChild.scrollIntoView();
+			}
+		});
+	}
+	
+}*/
+
+		</script>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				border: none;
+			}
+			
+			ul, li {
+				list-style: none;
+			}
+			
+			#box {
+				width: 500px;
+				height: 550px;
+				border: 3px solid #ccc;
+				margin: 10px auto;
+				padding: 10px;
+			}
+			
+			#list {
+				width: 480px;
+				height: 430px;
+				border: 1px dashed #ccc;
+				padding: 10px;
+				overflow: auto;
+			}
+			
+			#txt {
+				width: 500px;
+				height: 50px;
+				border: 1px solid orange;
+				margin-top: 10px;
+			}
+			
+			#send {
+				width: 60px;
+				height: 30px;
+				float: right;
+			}
+			
+			#list li span{
+				display: inline-block;
+				height: 30px;
+				line-height: 30px;
+				background: #99f;
+				padding: 0 5px;
+				border-radius: 5px;
+				margin-bottom: 5px;
+			}	
+
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<ul id="list">
+				<li>
+					<span>[张三]:你好</span>
+				</li>
+				<li>
+					<span>[李四]:你也好</span>
+				</li>
+				<li>
+					<span>[laowang]:你也好</span>
+				</li>
+			</ul>
+			<textarea id="txt"></textarea>
+			<input id="send" type="button" value="发送" />
+		</div>
+	</body>
+</html>

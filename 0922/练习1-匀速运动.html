@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+
+
+var timer = null;
+
+// startMove 移动物体		
+// 参数：
+//    oBox:  移动的物体，节点对象
+function startMove(oBox) {
+	// 移动前先停止之前的定时器，避免多次点击创建多个定时器的情况
+	clearInterval(oBox.timer);
+	
+	// 每个物体，都有一个自己的timer
+	// 在 oBox 中新增了一个属性 timer
+	oBox.timer = setInterval(function() {
+		
+		// 当前的left
+		var current = oBox.offsetLeft;
+		
+		// 判断位置
+		if (current >= 600) {
+			clearInterval(oBox.timer);
+			
+			return ; // 终止函数
+		}
+		
+		// 更新位置
+		oBox.style.left = current + 10 + "px";
+	
+	}, 100);
+}
+
+onload = function() {
+	var oBtn = document.getElementsByTagName("input")[0];
+	
+	var oBox = document.getElementById("box");
+	
+	oBtn.onclick = function() {
+		startMove(oBox);
+	}
+	
+	
+	var oBtn2 = document.getElementsByTagName("input")[1];
+	var oBox2 = document.getElementById("box2");
+	
+	oBtn2.onclick = function() {
+		startMove(oBox2);
+	}
+	
+	
+	
+}
+
+		</script>
+	</head>
+	<body>
+		<input type="button" value="匀速运动" />
+		
+		<div id="box" style="background: red; width: 100px; height: 100px; position: absolute; left: 10px; top: 40px;"></div>
+		
+		<input type="button" value="匀速运动2" />
+		
+		<div id="box2" style="background: red; width: 100px; height: 100px; position: absolute; left: 10px; top: 240px;"></div>
+		
+	</body>
+</html>
