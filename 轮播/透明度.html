@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				border: none;
+			}
+			
+			ul, li {
+				list-style: none;
+			}
+			
+			#box {
+				width: 500px;
+				height: 400px;
+				position: relative;
+			}
+			
+			#list {
+				width: 500px;
+				height: 300px;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			
+			#list li {
+				width: 500px;
+				height: 300px;
+				position: absolute;
+				left: 0;
+				top: 0;
+				opacity: 1;
+				filter: alpha(opacity=100);
+			}
+			
+			#list img {
+				width: 500px;
+				height: 300px;
+			}
+			
+			#list2 {
+				width: 500px;
+				height: 100px;
+				background: #999;
+				position: absolute;
+				left: 0;
+				top: 300px;
+			}
+			
+			#list2 li {
+				width: 100px;
+				height: 100px;
+				float: left;
+				opacity: 0.3;
+				filter: alpha(opacity=30);
+			}
+			
+			#list2 img {
+				width: 100px;
+				height: 100px;
+			}
+			
+			
+		</style>
+		<script src="js/move.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		onload=function(){
+			var oUl=document.getElementById("list");
+			var allLi=oUl.getElementsByTagName("li");
+			var allBtn=document.getElementById("list2").getElementsByTagName("li");
+			allLi[0].style.zIndex=100;
+			allBtn[0].style.opacity=1;
+			var t=3000;
+			var timer=setInterval(move,t);
+			var i=0;
+			
+			for(var j=0;j<allBtn.length;j++){
+				allBtn[j].index=j;
+				allBtn[j].onclick=function(){
+					i=this.index-1;
+					move();
+				}
+			}
+			
+			function　move(){
+				clearInterval(move,t)
+				i++;
+				for(var j=0;j<allBtn.length;j++){
+					allBtn[j].style.opacity=0.3;
+				}
+				if(i>=allLi.length){
+					allBtn[0].style.opacity=1;
+				}else{
+					allBtn[i].style.opacity=1;
+				}
+				
+				
+				
+				for(var j=0;j<allLi.length;j++){
+					allLi[j].style.zIndex=1;
+					allLi[j].style.opacity=0.1;
+				}
+				allLi[i].style.zIndex=100;
+				startMove(allLi[i],"opacity",100,function(){
+					if(i>=allLi.length-1){
+						i=-1;
+					}
+					clearInterval(timer);
+					timer=setInterval(move,t);
+				});
+				
+			}
+		}
+			
+			
+			
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<ul id="list">
+				<li><img src="img/1.jpg" /></li>
+				<li><img src="img/2.jpg" /></li>
+				<li><img src="img/3.jpg" /></li>
+			</ul>
+			<ul id="list2">
+				<li><img src="img/1.jpg" /></li>
+				<li><img src="img/2.jpg" /></li>
+				<li><img src="img/3.jpg" /></li>
+			</ul>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+		*{margin: 0;padding: 0;text-decoration: none;}
+		body{padding-top: 20px;}
+		#container{width: 600px;height:400px;border: 3px solid palegreen;margin: 0 auto;
+		overflow:  hidden;position: relative;}
+		#list{width:4200px;height:400px;position: absolute;left:-600px;top: 0;z-index: 1;}
+		#list img{float: left;}
+		#buttons{position: absolute;height: 10px;width: 100px;left: 250px;bottom: 20px;z-index: 2;}
+		#buttons span{cursor: pointer;border: 1px solid #FFFFFF;float: left;height: 10px;width: 10px;border-radius: 50%;background: #333; margin-right: 5px;}
+		#buttons .on {  background: orangered;}
+		.arrow{cursor: pointer; display: none; 
+		line-height: 39px; text-align: center;
+		 font-size: 36px; font-weight: bold; width: 40px; 
+		 height: 40px;  position: absolute; z-index: 2; top: 180px;
+		 background-color: RGBA(0,0,0,.3); color: #fff;}
+		.arrow:hover{background-color: RGBA(0,0,0,.7);}
+		#prev{left: 20px;}
+		#next{right: 20px;}
+		#container:hover .arrow{display: block;};
+		</style>
+		<script type="text/javascript">
+			window.onload=function(){
+				var container=document.getElementById("container");
+				var list=document.getElementById("list");
+				var buttons=document.getElementById("buttons").getElementsByTagName("span");
+				var prev=document.getElementById("prev");
+				var next=document.getElementById("next");
+				var index=0;
+				var length=5;
+				var animated=false;
+				
+				
+				function animate(offset){
+					animated=true;
+					var left=parseInt(list.style.left)+offset;
+					var time=1000;
+					var interval=10;
+					var speed=offset/(time/interval);
+					function go(){
+						if( (speed<0&&parseInt(list.style.left)>left )||(speed>0&&parseInt(list.style.left)<left)){
+							list.style.left=parseInt(list.style.left)+speed+"px";
+							console.log(list.style.left);
+							setTimeout(go,interval);
+						}else{
+							animated=false;
+							list.style.left=left+"px";
+							if(left>-200){
+								list.style.left=-600*length+"px";
+							}else if(left<(-600*length)){
+								list.style.left=-600+"px";
+							}
+						}
+					}
+					go();
+					
+				}
+				
+				function play(){
+					timer=setInterval(function(){
+						next.onclick();
+					},2500);
+				}
+				play();
+				function stop(){
+					clearInterval(timer);
+				}
+				
+				function showButton(){
+					for (var i = 0; i < buttons.length; i++) {
+						if(buttons[i].className=="on"){
+							buttons[i].className="";
+						}
+						buttons[index].className="on";
+					}
+				}
+				
+				prev.onclick=function(){
+					if(index==0){
+						index=4
+					}else{
+						index--;
+					}
+					if(animated==false){
+						animate(600);
+					}
+					showButton();
+				}
+				next.onclick=function(){
+					if(index==4){
+						index=0
+					}else{
+						index++;
+					}
+					if(animated==false){
+						animate(-600);
+					}
+					showButton();
+				}
+				for (var j = 0; j < buttons.length; j++) {
+					buttons[j].index=j;
+					buttons[j].onclick=function(){
+						if(this.className=="on"){
+							return;
+						}
+						var myIndex = (this.index);
+						var offset= -600 * (myIndex- index);
+						animate(offset);
+                   		index = myIndex;
+                   		showButton();
+					}
+					
+				container.onmouseover=stop;
+				container.onmouseout=play;
+			
+				
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div id="container">
+			<div id="list" style="left:-600px;">
+				<img src="img/5.jpg"/>
+				<img src="img/1.jpg"/>
+				<img src="img/2.jpg"/>
+				<img src="img/3.jpg"/>
+				<img src="img/4.jpg"/>
+				<img src="img/5.jpg"/>
+				<img src="img/1.jpg"/>
+			</div>
+			<div id="buttons">
+				<span class="on"></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<a href="#" id="prev" class="arrow">&lt;</a>
+    		<a href="#" id="next" class="arrow">&gt;</a>
+		</div>
+	</body>
+</html>
