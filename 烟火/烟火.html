@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				margin: 0;
+				padding: 0;
+				height: 100%;
+				width: 100%;
+				background: #000;
+				overflow: hidden;
+			}
+			div{
+				position: absolute;
+				width: 4px;
+				background: white;
+				height: 20px;
+			}
+			span{
+				position: absolute;
+				height: 8px;
+				width: 8px;
+				border-radius: 50%;
+			}
+		</style>
+		<script src="js/day20-move.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			onload=function(){
+				var body=document.getElementsByTagName("body")[0];
+			
+				document.onclick=function up(evt){  //发射烟火，调用startMove函数
+					var evts=evt||event;
+					var x=evts.clientX;
+					var y=evts.clientY;
+					var div=document.createElement("div");
+					body.appendChild(div);
+					div.style.top=document.documentElement.clientHeight+"px";
+					div.style.left=x+"px";
+					startMove(div,{
+						top:y,
+						height:10
+					},function(){  //回调函数，烟火移除，同时调用sparkStart函数产生小烟火
+						body.removeChild(div);
+						var count=parseInt(Math.random()*30)+30;  //随机产生30-60个数的小烟火
+						for (var i = 0; i < count; i++) {
+							
+							sparkStart(x,y);
+							
+						}
+						
+					});
+					
+				}
+				
+				
+				function sparkStart(x,y){   //产生烟火，
+					
+					var sparkNode=document.createElement("span");
+					sparkNode.style.background=randomColor();  //调用生产随机颜色的函数
+					
+					sparkNode.style.left=x+"px"; 
+					sparkNode.style.top=y+"px";    //小烟火爆炸的初始位置，即鼠标点击的初始位置
+					
+					body.appendChild(sparkNode);
+					
+					var xSpeed=parseInt(Math.random()*40-20);  
+					var ySpeed=parseInt(Math.random()*40-20);  //随机产生XY轴方向的正负速度；
+					
+					
+					var timer=setInterval(function(){         //设定抛物线运动的定时器
+						ySpeed++;
+						sparkNode.style.left=sparkNode.offsetLeft+xSpeed+"px";
+						sparkNode.style.top=sparkNode.offsetTop+ySpeed+"px";
+						//判断溢出边框时为临界条件，移除小烟火节点，清除定时器
+						if(sparkNode.clientLeft<0||sparkNode.clientLeft>document.documentElement.clientWidth||sparkNode.offsetTop<0||sparkNode.offsetTop<0||sparkNode.offsetTop>document.documentElement.clientHeight){
+							
+							body.removeChild(sparkNode);
+							clearInterval(timer);
+							
+						}
+						
+					},30)
+					
+				}
+				
+				
+				function randomColor() {
+					return "rgb("+parseInt(Math.random()*256)+","+parseInt(Math.random()*256)+","+parseInt(Math.random()*256)+")";
+					//返回随机生成的rgb颜色
+					//return "rgba(" + parseInt(Math.random() * 256) + "," + parseInt(Math.random() * 256) + "," + parseInt(Math.random() * 256) + "," + .7 +")";
+
+				}
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>
