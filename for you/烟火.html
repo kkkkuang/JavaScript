@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				margin: 0;
+				padding: 0;
+				height: 100%;
+				width: 100%;
+				background: #000;
+				overflow: hidden;
+				font-family: "微软雅黑";
+			}
+			div{
+				position: absolute;
+				width: 4px;
+				background: white;
+				height: 20px;
+			}
+			
+			span{
+				position: absolute;
+				height: 8px;
+				width: 8px;
+				border-radius: 50%;
+			}
+			p{
+				width: 300px;
+				height: 150px;
+				margin: 0 0 0 -150px;
+				position: relative;
+				background:pink;
+				border-radius: 30px;
+				top: 250px;
+				left:50%;
+				display: none;
+			}
+			i{
+				display: block;
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100px;
+				width: 300px;
+				text-align: center;
+				color: #ea4343;
+				font-size: 50px;
+				line-height: 100px;
+				font-style: normal;
+			}
+			input{
+				width: 80px;
+				height: 30px;
+				border: 0;
+				position: absolute;
+				font-size: 18px;
+				bottom: 10px;
+				background: #b70202;
+				border-radius: 8px ;
+				color:#FFFFFF;
+			}
+			em{
+				position: absolute;
+				top: 5px;
+				right: 15px;
+				width: 60px;
+				height: 30px;
+				line-height: 10px;
+				font-size: 14px;
+				color: black;
+				text-align: center;
+				font-style: normal;
+				display: none;
+				cursor: pointer;
+			}
+			#btn{
+				left:40px ;
+			}
+			#btn2{
+				right: 40px;
+			}
+		</style>
+		<script src="js/day20-move.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			onload=function(){
+				var body=document.getElementsByTagName("body")[0];
+				var p=document.getElementsByTagName("p")[0];
+				var btn=document.getElementById("btn");
+				var btn2=document.getElementById("btn2");
+				var contain=document.getElementById("contain");
+				var num=0;
+				var oI=document.getElementsByTagName("i")[0];
+				document.onclick=function up(evt){ 
+					//发射烟火，调用startMove函数
+					
+					num++;
+					var evts=evt||event;
+					var x=evts.clientX;
+					var y=evts.clientY;
+					var div=document.createElement("div");
+					body.appendChild(div);
+					div.style.top=document.documentElement.clientHeight+"px";
+					div.style.left=x+"px";
+					
+					if(num>5){
+						p.style.display="block";
+						btn.onclick=function(){
+							alert("我就知道你会点这个的");
+							
+						}
+						btn2.onclick=function(){
+							alert("哈哈哈哈哈哈哈哈")
+							
+						}
+						oI.ondblclick=function(){
+							p.style.display="none";
+							i=0;
+							
+						}
+						
+					}
+					
+					startMove(div,{
+						top:y,
+						height:8
+					},function(){  //回调函数，烟火移除，同时调用sparkStart函数产生小烟火
+						body.removeChild(div);
+						var count=parseInt(Math.random()*30)+30;  //随机产生30-60个数的小烟火
+						for (var i = 0; i < count; i++) {
+							
+							sparkStart(x,y);
+							
+						}
+						
+					});
+					
+				}
+				
+				
+				function sparkStart(x,y){   //产生烟火，
+					
+					var sparkNode=document.createElement("span");
+					sparkNode.style.background=randomColor();  //调用生产随机颜色的函数
+					
+					sparkNode.style.left=x+"px"; 
+					sparkNode.style.top=y+"px";    //小烟火爆炸的初始位置，即鼠标点击的初始位置
+					
+					body.appendChild(sparkNode);
+					
+					var xSpeed=parseInt(Math.random()*40-20);  
+					var ySpeed=parseInt(Math.random()*40-20);  //随机产生XY轴方向的正负速度；
+					
+					
+					var timer=setInterval(function(){         //设定抛物线运动的定时器
+						ySpeed++;
+						sparkNode.style.left=sparkNode.offsetLeft+xSpeed+"px";
+						sparkNode.style.top=sparkNode.offsetTop+ySpeed+"px";
+						//判断溢出边框时为临界条件，移除小烟火节点，清除定时器
+						if(sparkNode.clientLeft<0||sparkNode.clientLeft>document.documentElement.clientWidth||sparkNode.offsetTop<0||sparkNode.offsetTop<0||sparkNode.offsetTop>document.documentElement.clientHeight){
+							
+							body.removeChild(sparkNode);
+							clearInterval(timer);
+							
+						}
+						
+					},30)
+					
+				}
+				
+				
+				function randomColor() {
+					return "rgb("+parseInt(Math.random()*256)+","+parseInt(Math.random()*256)+","+parseInt(Math.random()*256)+")";
+					//返回随机生成的rgb颜色
+					//return "rgba(" + parseInt(Math.random() * 256) + "," + parseInt(Math.random() * 256) + "," + parseInt(Math.random() * 256) + "," + .7 +")";
+
+				}
+				
+				
+			}
+		</script>
+	</head>
+	<body>
+		<p>
+			<i>我我</i>
+			<em>关闭</em>
+		<input type="button" name="" id="btn" value="哈哈哈哈" />
+		<input type="button" name="" id="btn2" value="嘿嘿嘿嘿" />
+	</p>
+	</body>
+</html>
