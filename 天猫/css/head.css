@@ -1,0 +1,233 @@
+			*{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				text-decoration: none;
+			}
+			body{
+				font-family: "微软雅黑";
+			}
+			.header{
+				height: 32px;
+				width: 1423px;
+				background: #f2f2f2;
+				border-bottom: 1px solid #e5e5e5;
+			}
+			.headerLeft{
+				margin-left: 90px;
+				float: left;
+				position: relative;
+			}
+			.headerLeft span,.headerLeft a{
+				font-size: 11px;
+				text-align: center;
+				line-height: 32px;
+				color: #999999;
+			}
+			.headerLeft a{
+				margin-left: 20px;
+			}
+			.headerLeft .p_click{
+				position: absolute;
+				height: 32px;
+				width: 60px;
+				right: -5px;
+				top: 0;
+				background: #f2f2f2;
+				z-index: 2;
+				display: none;
+				color: #FF4400;
+			}
+			.headerLeft a:hover{
+				color: red;
+			}
+			.headerRight{
+				margin-right:105px ;
+				height: 32px;
+			}
+			.headerRight img{
+				vertical-align: middle;
+			}
+			.headerRight li a:hover{
+				color: red;
+			}
+			.headerInfo{
+				margin-left: 280px;
+				float: left;
+			}
+			.headerInfo>li{
+				float: left;
+				margin: 0 8px;
+			}
+			.headerInfo li a{
+				font-size: 11px;
+				text-align: center;
+				line-height: 32px;
+				color: #999999;
+				padding: 0 5px;
+			}
+			.headerBorder{
+				border-right: 1px solid #ccc;
+				padding-right:20px!important ;
+				}
+			.headerInfo li a i{
+				font-style: normal;
+				color: #000;
+			}
+			.headerOther{
+				height: 32px;
+				float: right;
+				width: 350px;
+			}
+			.headerOther>li{
+				float: left;
+				margin: 0 5px;
+			}
+			.headerOther li a {
+				font-size: 11px;
+				text-align: center;
+				line-height: 32px;
+				color: #999999;
+				padding: 0 5px;
+			}
+			.myTaobao{
+				position: relative;
+				width: 70px;
+			}
+			.mycollect{
+				position: relative;
+				width: 70px;
+			}
+			.mycollect:hover{
+				background: white;
+				color: red;
+				text-decoration: underline;
+			}
+			.myNav:hover{
+				background: white;
+				text-decoration: underline;
+			}
+			.myTaobao:hover{
+				background: #fff;
+				text-decoration: underline;
+				color: red;
+			}
+			.myTaobaoInfo,.mycollectInfo{
+				width: 90px;
+				position: absolute;
+				top: 32px;
+				left: -1px;
+				z-index: 100;
+				background: white;
+				border-right: 1px solid #ccc;
+				border-left: 1px solid #ccc;
+				border-bottom: 1px solid #ccc;
+				display: none;
+			}
+			.code{
+				position: absolute;
+				top: 25px;
+				left: -40px;
+				width: 130px;
+				height: 170px;
+				z-index: 5;
+				display: none;
+			}
+			.myNav{
+				position: relative;
+			}
+			.webNav{
+				width: 1198px;
+				height: 251px;
+				background: #fff;
+				position: absolute;
+				top: 32px;
+				right: 0;
+				z-index: 5;
+				border:1px solid #ccc;
+				border-top: none!important;
+				display: none;
+			}
+			.webNavLeft{
+				margin-left: 30px;
+				width: 305px;
+				float: left;
+			}
+			.webNavLeft p{
+				margin: 27px 0 20px 0;
+				color: #f56a00;
+				font-size: 22px;
+			}
+			.webNav01,.webNav02{
+				float: left;
+				margin-right: 40px;
+			}
+			.webNav01 li,.webNav02 li,.webNav03 li{
+				height: 30px;
+				line-height: 30px;
+			}
+			.webNav03{
+				float: left;
+			}
+			.webNavMarket{
+				float: left;
+				width: 405px;
+				height:200px;
+				margin: 25px 0 0 0;
+				border-left: 1px solid #ccc;
+			}
+			.webNavMarket p{
+				margin: 5px 0 20px 30px;
+				color: #4078da;
+				font-size: 22px;
+			}
+			.webNavMarket ul{
+				float: left;
+				margin-left: 65px;
+			}
+			.webNavMarket ul li{
+				height: 30px;
+			}
+			.webNavBrand{
+				width: 300px;
+				float: left;
+				height: 200px;
+				margin: 25px 0 0 0;
+				border-left: 1px solid #ccc;
+			}
+			.webNavBrand p{
+					margin: 5px 0 20px 30px;
+					color: #000;
+					font-size: 22px;
+			}
+			.webNavBrand ul{
+				float: left;
+				margin-left: 30px;
+			}
+			.webNavBrand ul li{
+				height: 30px;
+			}
+			.webNavHelp{
+				width: 150px;
+				float: left;
+				height: 200px;
+				margin: 25px 0 0 0;
+				border-left: 1px solid #ccc;
+			}
+			.webNavHelp p{
+					margin: 5px 0 20px 15px;
+					color: #000;
+					font-size: 20px;
+			}
+			.webNavHelp ul{
+				float: left;
+				margin-left: 20px;
+			}
+			.webNavHelp ul li{
+				height: 30px;
+			}
+			
+			.webNav img {
+				display: block;
+				float: right;
+			}

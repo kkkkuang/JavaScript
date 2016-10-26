@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$('a').click(function(event){
+					$('a').attr('href','http://www.baidu.com');
+					event.preventDefault();
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<a href="">百度一下</a>
+	</body>
+</html>

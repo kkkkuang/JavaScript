@@ -1,0 +1,339 @@
+
+			.right_banner{
+				position: fixed;
+				right: 0;
+				width: 35px;
+				height: 100%;
+				top: 0;
+				background: #000000;
+				z-index: 5;
+			}
+			.search{
+				width: 1423px;
+				height:130px;
+			}
+			.logo{
+				width: 90px;
+				height: 105px;
+				margin-left: 144px;
+				margin-top:25px ;
+				background: url(../img/tmall_17.jpg) center no-repeat;
+				float: left;
+			}
+			.searchButton{
+				float: left;
+				margin: 18px 0 0 174px;
+				width: 621px;
+				height:36px;
+				position: relative;
+			}
+			.searchButton .input{
+				width: 616px;
+				height:36px;
+				border: 2px solid #c40000;
+				font-size: 18px;
+				color: #000;
+				outline: none;
+				padding-left: 5px;
+			}
+			.searchButton .button{
+				height: 40px;
+				width: 132px;
+				position: absolute;
+				background:#c40000 ;
+				color: white;
+				text-align: center;
+				top: 0;
+				right: -2px;
+				border: 0;
+				font-size: 22px;
+				font-weight: bolder;
+			}
+			.searchTip{
+				position: absolute;
+				top:130px ;
+				left: 407px;
+				width: 635px;
+			}
+			.searchTip a{
+				font-size: 16px;
+				padding: 0 8px;
+				color: #999;
+				border-left: 1px solid #ccc;
+			}
+			.searchTip a:first-child{
+				border-left:0!important;
+			}
+			.searchTip a:nth-child(even){
+				color:#c40000;
+			}
+			.nav{
+				width: 1423px;
+				height:36px ;
+				background: #dd2727;
+				position: relative;
+			}
+			.nav>ul{
+				height: 36px;
+				margin-left: 290px;
+			}
+			.nav>ul li{
+				float: left;
+				padding: 0 15px;
+				position: relative;
+				height:36px ;
+			}
+			.nav>ul li a{
+				color: white;
+				text-align: center;
+				line-height: 36px;
+			}
+			.nav>ul li img{
+				padding-right:5px;
+			}
+			.nav>ul>li>ul{
+				position: absolute;
+				top: -17px;
+				left: 10px;
+			}
+			.nav>ul>li>ul img{
+				width: 40px;
+				height: 0;
+			}
+			.shopClass{
+				width: 200px;
+				height: 536px;
+				position: absolute;
+				top: 0;
+				left: 90px;
+				background: #ece4e4;
+				z-index: 2;
+			}
+			.shopClass .shopClass_1{
+				background: #c60a0a;
+				width: 200px;
+				height: 36px;
+				text-align: left;
+				color: white;
+				line-height: 36px;
+			}
+			.shopClass .shopClass_1 img{
+				margin:0 8px 0 16px;
+			}
+			.shopClass ul{
+				padding-bottom: 4px;
+			}
+			.shopClass>ul>li{
+				height: 31px;
+				text-align: left;
+				line-height: 31px;
+				font-size: 14px;
+			}
+			.shopClass>ul>li>img{
+				margin: 0 8px 0 12px;
+			}
+			.mainShopClass{
+				width: 850px;
+				height: 500px;
+				position: absolute;
+				top:36px ;
+				left: 200px;
+				background: #fafafa;
+				display: none;
+			}
+			.mainShopClass>ul{
+				width: 625px;
+				background: #fff;
+				float: left;
+			}
+			.mainShopClass>ul>li {
+				padding: 5px 10px;
+			}
+			.mainShopClass>ul>li>span {
+				display: block;
+				float: left;
+				margin-right: 20px;
+				height: 2em;
+				margin-left:10px ;
+			}
+			.mainShopClass>ul>li>p{
+				margin-left: 120px;
+				width: 493px;
+				border-bottom: 1px dashed #ccc;
+				padding: 10 0px;
+			}
+			.mainShopClass>ul>li>p a{
+				color: #666666;
+				padding-right: 4px;
+				font-size: 12px;
+			}
+			.mainShopClassRight{
+				margin: 10px 0 0 10px;
+				float: left;
+				width: 190px;
+				height: 385px;
+			}
+			.mainShopClassRight div img{
+				width: 93px;
+				height: 47px;
+			}
+			.mainShopClassRight div{
+				width: 93px;
+				height: 47px;
+				margin: 0 1px 1px 0;
+				float: left;
+			}
+			.mainShopClassRightBottom{
+				margin: 11px 0 0 10px;
+				width: 189px;
+				height: 87px;
+				float: left;
+			}
+			.mainShopClassRightBottom img{
+				width: 189px;
+				height: 87px;
+			}
+			.active1{
+				background: #fff;
+				color: red;
+			}
+			.banner{
+				width: 1423px;
+				height: 500px;
+				text-align: center;
+				overflow: hidden;
+				position: relative;
+			}
+			.banner ul>li>img{
+				width: 1440px;
+				height: 500px;
+			}
+			.banner .banner_1{
+				width: 1440px;
+				height: 500px;
+				overflow: hidden;
+			}
+			.banner ul{
+				width: 8640px;
+				height: 500px;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			.banner li{
+				float: left;
+				width: 1440px;
+			}
+			.banButton{
+				width: 190px;
+				height: 15px;
+				position: absolute;
+				bottom: 10px;
+				left: 630px;
+				text-align: center;
+			}
+			.banButton span{
+				width: 15px;
+				height: 15px;
+				border-radius: 8px;
+				border: 1px solid #999;
+				margin: 0 10px;
+				display: block;
+				float: left;
+			}
+			.bannerOther{
+				width: 100px;
+				height: 480px;
+				background-color:rgba(0,0,0,0.5);
+				position: absolute;
+				top: 10px;
+				right:120px;
+				z-index: 2;
+			}
+			.bannerOther .bannerOtherTop{
+				width: 70px;
+				height: 70px;	
+				margin: 12px 0 0 15px;
+			}
+			.bannerOther .bannerOtherTop img{
+				opacity: 1;
+				width: 70px;
+				height: 70px;
+				border-radius: 35px;	
+			}
+			.bannerOther p{
+				color: white;
+				font-size: 12px;
+			}
+			.bannerOtherP1{
+				margin: 11px 0;
+				text-align: center;
+			}
+			.bannerOtherP2{
+				width: 80px;
+				height: 24px;
+				border-radius: 12px;
+				background: #dd2727;
+				margin-left:10px ;
+				text-align: center;
+				line-height: 24px;
+			}
+			.bannerOtherP3{
+				margin: 0 11px;
+				padding: 11px 0;
+				border-bottom: 1px dashed #4c0d0c;
+			}
+			.bannerOtherP4{
+				margin: 22px 0 0 0px;
+			}
+			.bannerOtherP4 img,.bannerOtherP5 img.bannerOtherP6 img{
+				vertical-align: middle;
+				margin-right: 3px;
+			}
+			.bannerOtherP5,.bannerOtherP6{
+				margin: 10px 8px
+			}
+			.bannerOtherP7{
+				margin: 17px 0 20px 11px;
+			}
+			.bannerOtherP7 a{
+				color: white;
+			}
+			.bannerOtherP8{
+				height: 24px;
+				width: 100px;
+				background: #101010;
+				text-align: center;
+				line-height: 24px;
+			}
+			.bannerOtherP9{
+				color: white;
+			}
+			.bannerOtherbutton{
+				margin: 10px 0 10px 23px;
+				width: 57px;
+				height: 57px;
+				border-radius: 50%;
+			}
+			.bannerOtherbutton img{
+				width: 57px;
+				height: 57px;
+				border-radius: 50%;
+			}
+			.banner_bg{
+				background: orange;
+			}
+			.bannerTip{
+				position: absolute;
+				width: 40px;
+				height: 20px;
+				font-size: 12px;
+				background: rgb(0,0,0);
+				opacity: 0.4;
+				bottom: 5px;
+				left: 300px;
+				z-index: 5;
+				text-align: center;
+				line-height: 20px;
+				color: white;
+			}
