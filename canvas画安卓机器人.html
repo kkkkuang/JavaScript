@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin: -320px 0 0 -510px;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas1" width="1020" height="640"></canvas>
+	</body>
+</html>
+<script type="text/javascript">
+	var c=document.getElementById("canvas1");
+	var p=c.getContext('2d');
+	
+	//方形大背景
+	var grd=p.createLinearGradient(0,0,1020,620);
+	grd.addColorStop(0,'#1301ed');
+	grd.addColorStop(1,'#cc0031');
+	p.fillStyle=grd;
+	p.beginPath();
+	p.fillRect(0,0,1020,640);
+	p.closePath();
+	p.fill();
+	
+	//方形小背景
+	
+	p.fillStyle='#01ffff';
+	p.beginPath();
+	p.fillRect(228,97,588,477);
+	p.closePath();
+	p.fill();
+	
+	//左手臂
+	p.fillStyle='#fe0000';
+	p.beginPath();
+	p.fillRect(358,290,50,120);
+	p.closePath();
+	p.fill();
+	//左手臂上半圆
+	p.fillStyle='#fe0000';
+	p.beginPath();
+	p.arc(383,290,25,0,Math.PI*1,true);
+	p.closePath();
+	p.fill();
+	//左手臂下半圆
+	p.fillStyle='#fe0000';
+	p.beginPath();
+	p.arc(383,410,25,0,Math.PI*1);
+	p.closePath();
+	p.fill();
+	
+	//右手臂
+	p.fillStyle='#fe0000';
+	p.beginPath();
+	p.fillRect(644,290,50,120);
+	p.closePath();
+	p.fill();
+	//右手臂上半圆
+	p.fillStyle='#fe0000';
+	p.beginPath();
+	p.arc(669,290,25,0,Math.PI*1,true);
+	p.closePath();
+	p.fill();
+	//右手臂下半圆
+	p.fillStyle='#fe0000';
+	p.beginPath();
+	p.arc(669,410,25,0,Math.PI*1);
+	p.closePath();
+	p.fill();
+	
+	//头部
+	p.fillStyle='#fe0000';
+	p.beginPath();
+	p.arc(526,243,110,Math.PI*-0.03,Math.PI*0.97,true);
+	p.closePath();
+	p.fill();
+	
+	//左眼
+	p.fillStyle='#FFFFFF'
+	p.beginPath();
+	p.arc(475,198,10,0,Math.PI*2);
+	p.closePath();
+	p.fill();
+	
+	//右眼
+	p.fillStyle='#000'
+	p.beginPath();
+	p.arc(562,180,23,Math.PI*-0.08,Math.PI*0.92,false);
+	p.closePath();
+	p.fill();
+	
+	//眼罩黑线
+	p.strokeStyle='#000';
+	p.beginPath();
+	p.moveTo(476,141);
+	p.lineTo(552,186);
+	p.lineWidth=3 ;
+	p.closePath();
+	p.stroke();
+	
+	p.strokeStyle='#000';
+	p.beginPath();
+	p.moveTo(580,193);
+	p.lineTo(635,224);
+	p.lineWidth=3;
+	p.closePath();
+	p.stroke();
+	
+	//牙签
+	p.strokeStyle='#fff';
+	p.beginPath();
+	p.moveTo(627,254);
+	p.lineTo(671,229);
+	p.lineWidth=4;
+	p.closePath();
+	p.stroke();
+	
+	//身体 上半部
+	p.fillStyle='#fe0000';
+	p.beginPath();
+	p.fillRect(416,265,220,180);
+	p.closePath();
+	p.fill();
+	
+	//身体下半部
+	p.fillStyle='#fe0000';
+	p.beginPath();
+	p.fillRect(436,445,180,20);
+	p.closePath();
+	p.fill();
+	//身体下半部四分之一圆
+	p.fillStyle='#fe0000';
+	p.beginPath();
+	p.moveTo(436,445);
+	p.arc(436,445,20,Math.PI*0.5,Math.PI*1);
+	p.closePath();
+	p.fill();
+	
+	p.fillStyle='#fe0000';
+	p.beginPath();
+	p.moveTo(616,445);
+	p.arc(616,445,20,0,Math.PI*0.5);
+	p.closePath();
+	p.fill();
+	
+	//左脚
+	p.fillStyle='#fe0000';
+	p.beginPath();
+	p.fillRect(460,465,50,55);
+	p.closePath();
+	p.fill();
+	
+	p.fillStyle='#fe0000';
+	p.beginPath();
+	p.arc(485,518,25,0,Math.PI*2,true);
+	p.closePath();
+	p.fill();
+	//右脚
+	p.fillStyle='#fe0000';
+	p.beginPath();
+	p.fillRect(540,465,50,55);
+	p.closePath();
+	p.fill();
+	
+	p.fillStyle='#fe0000';
+	p.beginPath();
+	p.arc(565,518,25,0,Math.PI*2,true);
+	p.closePath();
+	p.fill();
+</script>

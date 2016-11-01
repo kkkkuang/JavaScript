@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="color" name="" id="" value="" style="display: block;"/>
+		<input type="button" name="" id="" value="橡皮擦" style="display: block;margin: 10px 0;"/>
+		<canvas id="canvas2" width="600" height="600" style="border: 1px solid #ccc;"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+	var c=document.getElementById("canvas2");
+	var p=c.getContext('2d');
+	var oInput=document.getElementsByTagName("input")[0];
+	var btn=document.getElementsByTagName("input")[1];
+	//获取输入颜色框的颜色，再赋值给p的颜色
+	oInput.onchange=function(){
+		var color=this.value;
+		p.strokeStyle=color;
+	}
+	//封装绘画函数
+	function draw(width){
+		c.onmousedown=function(e){
+			var evt=e||event
+			var x=evt.offsetX;
+			x=parseInt(x);
+			var y=evt.offsetY;
+			y=parseInt(y);
+			p.beginPath();
+			p.moveTo(x,y);
+			p.lineWidth=width;
+			
+			c.onmousemove=function(evts){
+				var evts=evts||event;
+				var x2=parseInt(evts.offsetX);
+				var y2=parseInt(evts.offsetY);
+				p.lineTo(x2,y2);
+				p.stroke();
+			}
+			c.onmouseup=function(){
+				c.onmousemove=null;
+				c.onmouseup=null;
+			}
+		}
+	}
+	draw(3);
+	
+	//橡皮擦功能
+	
+	//定义一个flag,判断在橡皮擦功能或者继续绘画
+	var flag=true
+	btn.onclick=function(){
+		if(flag){
+			p.strokeStyle='#fff';
+			draw(40);
+			flag=false;
+			this.value='继续画';
+		}else{
+			p.strokeStyle=oInput.value;
+			draw(3);
+			flag=true;
+			this.value='橡皮擦'
+		}
+	}
+	
+	
+	
+</script>
