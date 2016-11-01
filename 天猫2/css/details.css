@@ -1,0 +1,455 @@
+.phone_nav{
+				width: 1423px;
+				height: 40px;
+				background:#FFFFFF;
+				border-bottom: 1px solid #162898;
+			}
+			.phone_nav p{
+				float: left;
+				margin-left: 136px;
+				height: 36px;
+				line-height: 40px;
+				color: #162898;
+				border-bottom: 4px solid #162898;
+				letter-spacing: 3px;
+				font-weight: bold;
+			}
+			.phone_nav ul{
+				margin-left:105px;
+				height: 40px;
+				float: left;
+			}
+			.phone_nav ul li{
+				float: left;
+				color: #000;
+				line-height: 40px;
+				margin:0 7px;
+				font-weight: bold;
+				padding: 0 3px;
+			}
+			.phone_nav ul li:hover{
+				background: #ccc;
+			}
+			.phone_banner img{
+				width: 100%;
+				height:85px;
+				display: block;
+				border: 0;
+			}
+			.phone_info{
+				overflow: hidden;
+				width: 1423px;
+			}
+			.phone_input{
+				float: right;
+				margin-right: 122px;
+				width: 192px;
+				height:23px;
+				position: relative;
+				margin-top: 7px;
+				
+			}
+			.phone_input input{
+				width: 192px;
+				height:25px;
+				border:1px solid #767676;
+				border-radius: 12px;
+				outline: none;
+			}
+			.phone_input img{
+				position: absolute;
+				top: 5px;
+				right:  9px;
+			}
+			.info_left{
+				width: 420px;
+				margin: 40px 0 0 145px;
+				position: relative;
+				float: left;
+			}
+			.info_left_pic {
+				width: 418px;
+				height: 418px;
+				border: 1px solid #CCCCCC;
+				position: relative;
+				
+			}
+			.info_left_pic img{
+				width: 418px;
+				height: 418px;
+			}
+			.info_left_pic span{
+				width: 200px;
+				height: 200px;
+				position: absolute;
+				background:red;
+				top: 0;
+				left: 0;
+				opacity: 0.1;
+				z-index: -1;
+			}
+			.info_left_pic_2{
+				width: 418px;
+				height: 418px;
+				position: absolute;
+				top: 0;
+				left:430px;
+				display: none;
+				overflow: hidden;
+				z-index: 4;
+			}
+			.info_left_pic_2 img{
+				position: absolute;
+			}
+			.info_left_tips{
+				margin-top: 23px;
+				overflow: hidden;
+				height: 60px;
+				line-height: 60px;
+			}
+			.info_left_tips img{
+				width: 56px;
+				height: 56px;
+				float: left;
+				margin: 2px 12px 0;
+			}
+			.info_left p{
+				margin-top: 45px;
+			}
+			.info_left p a{
+				margin-right: 35px;
+				color: #CCCCCC;
+				font-size: 14px;
+			}
+			.info_left p span{
+				margin-right: 145px;
+				color: #CCCCCC;
+				font-size: 14px;
+			}
+			.info_left p i{
+				margin-left: 10px;
+				font-style: normal;
+				color: #CCCCCC;
+				font-size: 14px;
+			}
+			.info_middle{
+				float: left;
+				width: 530px;
+				margin: 40px 0 0 20px;
+			}
+			.info_middle h3{
+				font-size:16px ;
+			}
+			.info_middle h5{
+				color: red;
+			}
+			
+			
+			.choose,.province,.city,.area{
+				margin: 0;
+				padding: 0;
+			}
+			.choose{
+				position: relative;
+			}
+			.choose>li{
+				float: left;
+				width: 50px;
+				height: 20px;
+				font-size: 10px;
+				border: 1px solid #ccc;
+				list-style: none;
+				text-align: center;
+				line-height: 20px;
+			}
+			.province,.city,.area{
+				position: absolute;
+				top: 20px;
+				left: 0;
+				z-index: 6;
+				width: 400px;
+				height:150px;
+				border: 1px solid #000;
+				display: none;
+				background: #fff;
+				overflow: hidden;
+			}
+			.province li,.city li,.area li{
+				list-style: none;
+				padding: 6px;
+				float: left;
+				cursor: pointer;
+			}
+			.translatePrice{
+				height: 15px;
+				margin: 18px 0 0 10px;
+			}
+			.translatePrice div {
+				float: left;
+			}
+			.translatePrice span{
+				float: left;
+				margin-right: 10px;
+				font-size: 14px;
+			}
+			.price {
+				margin-top: 15px;
+				background: #e9e9e9;
+				width: 510px;
+				height: 108px;
+			}
+			.price :first-child{
+				margin: 10px 0 0 8px;
+				color: #666;
+			}
+			.price p:first-child img{
+				width: 58px;
+				height: 16px;
+				margin-right: 5px;
+				/*vertical-align: middle;*/
+			}
+			.price p:first-child span{
+				float: right;
+				margin: 10px 30px 0 0 ;
+				color: red;
+			}
+			.price :nth-child(2){
+				margin: 10px 0 0 15px;
+				color: #999;
+			}
+			.price :nth-child(2) i{
+				font-style: normal;
+				margin-left: 45px;
+				color: #c40000;
+			}
+			.price :nth-child(2) i b{
+				font-size: 22px;
+				color: #c40000;
+			}
+			.price :nth-child(3) {
+				margin: 10px 0 0 15px;
+				color: #999;
+			}
+			.price :nth-child(3) em{
+				margin-left: 22px;
+				color: #b5621b;
+				font-style: normal;
+			}
+			.price :nth-child(3) strong{
+				float: right;
+				margin:0 20px 10px 0;
+				font-weight: normal;
+				color: red;
+			}
+			.sale_num{
+				width: 510px;
+				height: 36px;
+				margin: 18px 0 0 0;
+				border-top: 1px dashed #ccc;
+				border-bottom: 1px dashed #ccc;
+			}
+			.sale_num span{
+				width: 168px;
+				height: 16px;
+				text-align: center;
+				font-size: 14px;
+				display: block;
+				float: left;
+				margin-top: 9px;
+				border-right: 1px solid #ccc;
+			}
+			.sale_num span:last-child{
+				border: 0!important;
+			}
+			.sale_num span i{
+				color:#c40057;
+				font-style: normal;
+				font-weight: bold;
+			}
+			.sale_num span:last-child i{
+				color: #228800;
+			}
+			.phone_color{
+				height: 40px;
+				margin-top:16px;
+				line-height: 40px;
+			}
+			.phone_color i{
+				float: left;
+				font-style: normal;
+				margin-right: 20px;
+			}
+			.phone_color span{
+				cursor: pointer;
+				width: 91px;
+				height: 38px!important;
+				border: 2px solid #b8b7bd;
+				display: block;
+				float: left;
+				margin-right: 6px;
+				position: relative;
+			}
+			.phone_color .smallPic{
+				width: 30px;
+				height: 38px;
+				float: left;
+				vertical-align: middle;
+				padding: 0;
+			}
+			.choose_tip{
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				display: none;
+			}
+			.package,.capacity,.verson,.buyWay,.buyNum{
+				height: 40px;
+				margin-top:10px;
+				line-height: 40px;
+			}
+			.package span,.capacity span,.verson span,.buyWay span,.buyNum span{
+				height: 28px;
+				border: 2px solid #CCCCCC;
+				position: relative;
+				font-size: 14px;
+				display: block;
+				float: left;
+				text-align: center;
+				line-height: 30px;
+				margin-top:5px ;
+				margin-right: 5px;
+			}
+			.package span{
+				cursor: pointer;
+				width: 67px;
+				}
+			.capacity span{
+				width: 48px;
+				cursor: pointer;
+			}
+			.verson span{
+				width:67px;
+				cursor: pointer;
+			}
+			.buyWay span{
+				width:55px;
+				cursor: pointer;
+			}
+			.buyNum input{
+				width:42px;
+				height: 28px;
+				border: 1px solid #CCCCCC;
+				position: relative;
+				font-size: 14px;
+				display: block;
+				float: left;
+				line-height: 30px;
+				margin-top:5px ;
+				margin-right: 5px;
+				outline: none;
+				margin-left: 32px;
+			}
+			.package i,.capacity i,.verson i,.buyWay i,.buyNum i{
+				float: left;
+				font-style: normal;
+				margin-right: 18px;
+			}
+			.info_middle button{
+				width: 178px;
+				height: 38px;
+				border: 1px solid #c40000;
+				line-height: 38px;
+				text-align: center;
+				font-size: 20px;
+				margin-right: 10px;
+				margin:50px 10px 150px 0;
+				outline: none;
+			}
+			.buyNow{
+				background: #ffeded;
+				margin-left: 65px;
+				color: #c40000;
+			}
+			.buyLater{
+				background: #c40000;
+				color: white;
+			}
+			.buyNum em{
+				font-style: normal;
+				color: #999;
+				margin-left: 15px;
+				font-size: 14px;
+			}
+			.info_left_tips_border{
+				border: 2px solid #000;
+				margin: 0 10px!important;
+			}
+			.info_left_pic div{
+				width: 420px;
+				height: 420px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 5;
+			}
+			.info_middle span em{
+				font-style: normal;
+			}
+			.addBorder{
+				border: 2px solid #be0106!important;
+			}
+			.success{
+				width: 547px;
+				height: 265px;
+				background: #fff;
+				position: fixed;
+				right: 35px;
+				top: 300px;
+				z-index: 10;
+				box-shadow:-6px 0 20px #999;
+				display: none;
+			}
+			.close {height: 20px;}
+			.close span{
+				display: block;
+				height: 20px;
+				float: right;
+				margin-right: 10px;
+				line-height: 20px;
+				margin-top: 6px;
+				color: #c2c2c2;
+				font-size: 16px;
+				cursor: pointer;
+			}
+			.success_1{
+				width: 500px;
+				height: 60px;
+				border-bottom: 1px dashed #999;
+				margin-left: 22px;
+			}
+			.success_1 img{
+				float: left;
+				margin-right: 20px;
+			}
+			.success_1 h3{
+				font-size: 14px;
+			}
+			.success_1 p{
+				font-size: 12px;
+				color: #999;
+			}
+			.success_1 p a{
+				color: blue;
+			}
+			.success_1 p span{
+				color: #C40000;
+			}
+			.success_1 p i{
+				font-style: normal;
+				color: blue;
+			}
+			.s_other{
+				margin: 14px 0 13px 22px;
+				color: #666;
+				font-size: 14px;
+			}

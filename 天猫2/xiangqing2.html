@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>三星 Galaxy Boom7</title>
+		<link rel="stylesheet" type="text/css" href="css/head.css"/>
+		<link rel="stylesheet" type="text/css" href="css/search&Info.css"/>
+		<link rel="stylesheet" type="text/css" href="css/content.css"/>
+		<link rel="stylesheet" type="text/css" href="css/details.css"/>
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/head.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/diming.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				
+				$('.info_left_tips img').mouseenter(function(){
+					$(this).addClass('info_left_tips_border').siblings().removeClass('info_left_tips_border')
+					var src=$(this).attr('src');
+					$('.info_left_pic img').attr('src',src);
+					$('.info_left_pic_2 img').attr('src',src);
+				})
+				$('.info_left_pic div').mousemove(function(event){
+					$('.info_left_pic_2').show();
+					var left=event.offsetX-100;
+					var top=event.offsetY-100;
+					if(left<=0){
+						left=0
+					}
+					if(top<=0){
+						top=0
+					}
+					if(left>=220){
+						left=220
+					}
+					if(top>=220){
+						top=220
+					}
+					$(this).siblings('span').css({
+						'z-index':2,
+						'left':left,
+						'top':top
+					});
+					//放大镜
+					$('.info_left_pic_2 img').css({
+						'left':-left*1.818,
+						'top':-top*1.818
+					})
+					
+				})
+				$('.info_left_pic').mouseleave(function(){
+					$(this).find('span').css('z-index',-1)
+					$('.info_left_pic_2').hide();
+				})
+				
+				//获取地址的json数据
+				$('.choose>li').click(function(){
+					$('.province').show().parent().siblings().find('ul').hide();
+					$('.province').text('');
+					$.each(province, function(index,ele) {
+						$('.province').append('<li index="'+index+'">'+ele+'</li>');
+					});
+					$('.province li').click(function(){
+						$('.city').show().parent().siblings().find('ul').hide(); 
+						$('.choose li:eq(0)').text($(this).text());
+						var a=$(this).attr('index');
+						//console.log(a);
+						$('.city').text('');
+						$.each(city[a], function(n,e) {
+							$('.city').append('<li index="'+n+'">'+e+'</li>');
+						});
+						$('.city li').click(function(){
+							$('.area').show().parent().siblings().find('ul').hide();
+							$('.choose li:eq(1)').text($(this).text());
+							var b=$(this).attr('index');
+							$('.area').text('');
+							$.each(area[b], function(nn,ee) {
+								$('.area').append('<li index="'+nn+'">'+ee+'</li>');
+							});
+							$('.area li').click(function(){
+								$('.area').hide().parent().siblings().find('ul').hide();
+								$('.choose li:eq(2)').text($(this).text());
+							})
+						})
+					})
+				})
+//				$('.choose>li ul').mouseleave(function(){
+//					$(this).hide();
+//				})
+				//添加点击选中事件
+				$('.package span,.verson span,.buyWay span').click(function(){
+					$(this).addClass('addBorder').siblings('span').removeClass('addBorder');
+					$(this).find('.choose_tip').show().end().siblings('span').find('.choose_tip').hide();
+				})
+				//选定不同的内存版本绑定不同的价格
+				$('.capacity .32GB').click(function(){
+					$(this).addClass('addBorder').siblings('span').removeClass('addBorder');
+					$(this).find('.choose_tip').show().end().siblings('span').find('.choose_tip').hide();
+					$('.price b').text('5688.00');
+				});
+				$('.capacity .64GB').click(function(){
+					$(this).addClass('addBorder').siblings('span').removeClass('addBorder');
+					$(this).find('.choose_tip').show().end().siblings('span').find('.choose_tip').hide();
+					$('.price b').text('6288.00');
+				})
+				//点击不同的颜色版本，左边显示对应的图片
+				$('.phone_color span').click(function(){
+					var src=$(this).find('.smallPic').attr('src');
+					$('.info_left_pic img').attr('src',src);
+					$('.info_left_pic_2 img').attr('src',src);
+					$(this).addClass('addBorder').siblings('span').removeClass('addBorder');
+					$(this).find('.choose_tip').show().end().siblings('span').find('.choose_tip').hide();
+				})
+				
+				
+				
+				
+				
+				
+				
+				//保存数据在cookie中
+				$('.buyLater').click(function(){
+					//提示页面的显示
+					$('.success').show();
+						$('.success .close span').click(function(){
+							$('.success').hide();
+						})
+					//检测是否有保存商品信息在购物车里，若有相同的，则数量加一，若无，则新加一个购物车商品
+					var newPhoneCapacity=$('.capacity').find('.addBorder').children('em').text();
+					var newPhoneColor=$('.phone_color').find('.addBorder').children('em').text();
+					var phoneColor=$.cookie('phone_color');
+					var phoneCapacity=$.cookie('capacity');
+					
+					if(phoneColor){
+						//选购信息相同的情况
+						if(newPhoneColor==phoneColor&&newPhoneCapacity==phoneCapacity){
+							var oNum=parseInt($.cookie('buyNum'));
+							oNum+=1;
+							$.cookie('buyNum',oNum,{expires:7});
+						}else if(newPhoneColor!=phoneColor||newPhoneCapacity!=phoneCapacity){
+							$.cookie('name2',$('.info_middle h3').text(),{expires:7});
+							var src=$('.phone_color').find('.addBorder').children('.smallPic').attr('src');
+							var price=$('.price b').text();
+							$.cookie('price2',price,{expires:7})
+							$.cookie('phone_color2',newPhoneColor,{expires:7});
+							$.cookie('src2',src,{expires:7})
+							$.cookie('package2',$('.package').find('.addBorder').children('em').text(),{expires:7});
+							$.cookie('capacity2',newPhoneCapacity,{expires:7});
+							$.cookie('verson2',$('.verson').find('.addBorder').children('em').text(),{expires:7});
+							$.cookie('buyWay2',$('.buyWay').find('.addBorder').children('em').text(),{expires:7});
+							$.cookie('buyNum2',$('.buyNum input').val(),{expires:7});
+							
+						}
+						
+					}else{
+						$.cookie('name',$('.info_middle h3').text(),{expires:7});
+						var src=$('.phone_color').find('.addBorder').children('.smallPic').attr('src');
+						var price=$('.price b').text();
+						$.cookie('price',price,{expires:7})
+						$.cookie('phone_color',newPhoneColor,{expires:7});
+						$.cookie('src',src,{expires:7})
+						$.cookie('package',$('.package').find('.addBorder').children('em').text(),{expires:7});
+						$.cookie('capacity',newPhoneCapacity,{expires:7});
+						$.cookie('verson',$('.verson').find('.addBorder').children('em').text(),{expires:7});
+						$.cookie('buyWay',$('.buyWay').find('.addBorder').children('em').text(),{expires:7});
+						$.cookie('buyNum',$('.buyNum input').val(),{expires:7});
+						
+					}
+					
+					
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div class="header">
+				<div class="headerLeft">
+					<span>喵，欢迎来到天猫</span>
+					<a href="login.html" class="p_login">请登录</a>
+					<a href="register.html" class="p_register">免费注册</a>
+					<a href="#" class="p_click">退出登录</a>
+				</div>
+				<div class="headerRight">
+					<ul class="headerInfo">
+						<li class="myTaobao"><a href="#">我的淘宝</a>
+							<ul class="myTaobaoInfo">
+								<li><a href="#">已买到的宝贝</a></li>
+								<li><a href="#">已卖出的宝贝</a></li>
+							</ul>
+						</li>
+						<li><img src="img/header/tmal_headl_03.jpg"/><a href="#">我关注的品牌</a></li>
+						<li><img src="img/header/tmal_headl_05.jpg"/><a href="shopCar.html">购物车</a></li>
+						<li class="mycollect"><a href="#" class="headerBorder">收藏夹</a>
+							<ul class="mycollectInfo">
+								<li><a href="#">收藏的宝贝</a></li>
+								<li><a href="#">收藏的店铺</a></li>
+							</ul>
+						</li>
+					</ul>
+					
+					<ul class="headerOther">
+						<li class="mycode"><img src="img/header/tmall_head_07.jpg"/><a href="">手机版</a>
+							<ul class="code">
+								<li><img src="img/erweima_03.jpg"/></li>
+							</ul>
+						</li>
+						<li><a href="#">淘宝网</a></li>
+						<li><a href="#">企业购</a></li>
+						<li><a href="#">商家支持</a></li>
+						<li class="myNav"><img src="img/header/tmall_head_10.jpg"/><a href="#">网站导航</a>
+							<div class="webNav">
+								<div class="webNavLeft">
+									<p>热点推荐Hot</p>
+									<ul class="webNav01">
+										<li>天猫超市<img src="img/tips_03.jpg" alt="" /></li>
+										<li>女装新品</li>
+										<li>试美妆</li>
+										<li>精明妈咪<img src="img/tips_07.jpg" alt="" /></li>
+										<li>会员积分</li>
+									</ul>
+									<ul class="webNav02">
+										<li>喵鲜生</li>
+										<li>酷玩街<img src="img/tips_07.jpg" alt="" /></li>
+										<li>运动新品</li>
+										<li>吃乐辉<img src="img/tips_03.jpg" alt="" /></li>
+										<li>天猫国际</li>
+									</ul>
+									<ul class="webNav03">
+										<li>科技新品<img src="img/tips_03.jpg" alt="" /></li>
+										<li>内衣新品</li>
+										<li>时尚先生<img src="img/tips_07.jpg" alt="" /></li>
+										<li>企业采购</li>
+									</ul>
+								</div>
+								<div class="webNavMarket">
+									<p>行业市场 Market</p>
+									<ul>
+										<li>美妆<img src="img/tips_03.jpg" alt="" /></li>
+										<li>女鞋</li>
+										<li>运动</li>
+										<li>食品</li>
+									</ul>
+									<ul>
+										<li>电器<img src="img/tips_07.jpg" alt="" /></li>
+										<li>男鞋</li>
+										<li>母婴</li>
+										<li>配饰<img src="img/tips_03.jpg" alt="" /></li>
+									</ul>
+									<ul>
+										<li>女装<img src="img/tips_07.jpg" alt="" /></li>
+										<li>内衣</li>
+										<li>家装</li>
+										<li>汽车<img src="img/tips_07.jpg" alt="" /></li>
+									</ul>
+								</div>
+								<div class="webNavBrand">
+									<p>品牌风尚 Brand</p>
+									<ul>
+										<li>尚天猫</li>
+										<li>天猫原创</li>
+									</ul>
+									<ul>
+										<li>大牌街</li>
+										<li>什么牌子好</li>
+									</ul>
+									<ul>
+										<li>潮牌街</li>
+									</ul>
+								</div>
+								<div class="webNavHelp">
+									<p>服务指南Help</p>
+									<ul>
+										<li>服务中心</li>
+										<li>品质保障</li>
+										<li>特色服务</li>
+										<li>7天退换货</li>
+									</ul>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		<div class="right_banner">
+				<div class="img1">
+					<img src="img/content/bannerRight_03.jpg"/>
+				</div>
+				<div class="img2">
+					<img src="img/content/bannerRight_07.jpg"/>
+					<span>购物车</span>
+				</div>
+				<div class="img9">
+					<img  src="img/content/bannerRght_03.jpg"/>
+				</div>
+				<div class="img3">
+					<img  src="img/content/bannerRight_09.jpg"/>
+				</div>
+				<div class="img4">
+					<img src="img/content/bannerRight_12.jpg"/>
+				</div>
+				<div class="img5">
+					<img src="img/content/bannerRight_14.jpg"/>
+				</div>
+				<div class="img6">
+					<img src="img/content/bannerRight_17.jpg"/>
+				</div>
+				<div class="img7">
+					<img src="img/content/bannerRight_19.jpg"/>
+				</div>
+				<div class="img8">
+					<img src="img/content/bannerRight_23.jpg"/>
+				</div>
+				<div class="img10">
+					<img src="img/content/bannerB.png"/>
+				</div>
+			</div>
+		<div class="search">
+				<a href="index.html" class="logo">
+				</a>
+				<div class="searchButton">
+					<input class="input" type="text" name="" id="" value="" placeholder=" 秋冬衣服不可少" />
+					<input class="button" type="button" name="" id="" value="搜索" />
+				</div>
+				<div class="searchTip">
+					<a href="#">外套</a>
+					<a href="#">坚果</a>
+					<a href="#">四件套</a>
+					<a href="#">洗衣机</a>
+					<a href="#">打底裤</a>
+					<a href="#">短靴</a>
+					<a href="#">双肩包</a>
+					<a href="#">夹克</a>
+					<a href="#">polo衫</a>
+					<a href="#">吹风机</a>
+				</div>
+			</div>
+		<div class="phone_banner">
+			<img src="img/S7-Edge_02.jpg"/>
+		</div>
+		<div class="phone_nav">
+			
+			<p>全部商品分类</p>
+			<ul>
+				<li>首页</li>
+				<li>手机</li>
+				<li>笔记本电脑</li>
+				<li>平板电脑</li>
+				<li>显示器</li>
+				<li>电视</li>
+				<li>冰箱</li>
+				<li>洗衣机</li>
+				<li>空气净化器</li>
+				<li>购物须知</li>
+			</ul>
+			<div class="phone_input">
+				<input type="text" name="" id="" value="" />
+				<img src="img/S7-Edge_06.jpg"/>
+			</div>
+		</div> 
+		<div class="phone_info">
+			<div class="info_left">
+				<div class="info_left_pic">
+					<img src="img/sangsung/001.jpg"/>
+					<span></span>
+					<div></div>
+				</div>
+				<div class="info_left_pic_2" >
+					<img src="img/sangsung/001.jpg"/>
+				</div>
+				<div class="info_left_tips">
+					<img src="img/sangsung/001.jpg"/>
+					<img src="img/sangsung/002.jpg"/>
+					<img src="img/sangsung/003.jpg"/>
+					<img src="img/sangsung/004.jpg"/>
+					<img src="img/sangsung/005.jpg"/>
+				</div>
+				<p><a href="">分享</a><span>收藏商品(239123人气)</span><i>举报</i></p>
+			</div>
+			<div class="info_middle">
+				<h3>立减300 Samsung/三星 Galaxy Boom7 SM-G9350全网通 4G手机</h3>
+				<h5>12期免息 送300元红包</h5>
+				<div class="price">
+					<p><img src="img/sangsung/youhui.png"/>全天猫实物商品通用<span>去刮券</span></p>
+					<p>价格<i>￥<b>5688.00-6288.00</b></i></p>
+					<p>本店活动<em>满4000减300</em><strong>更多优惠</strong></p>
+				</div>
+				<div class="address">
+						<div class="translatePrice">
+							<span>运至</span>
+								<div>
+								<ul class="choose">
+									<li>
+										省份
+										<ul class="province"></ul>
+									</li>
+									<li>市
+										<ul class="city"></ul>
+									</li>
+									<li>地区
+										<ul class="area"></ul>
+									</li>
+								</ul>
+								</div>
+						</div>
+					</div>
+				
+				<div class="sale_num">
+					<span>月销量<i>1958</i></span>
+					<span>累计评价<i>17630</i></span>
+					<span>送天猫积分<i>568</i>起</span>
+				</div>
+				<div class="phone_color">
+					<i>机身颜色</i>
+					<span><img class="smallPic" src="img/sangsung/004.jpg"/><em>雪晶白</em><img class="choose_tip" src="img/S7-Edge_10.jpg" alt="" /></span>
+					<span><img class="smallPic" src="img/sangsung/003.jpg"/><em>星钻黑</em><img class="choose_tip" src="img/S7-Edge_10.jpg" alt="" /></span>
+					<span><img class="smallPic" src="img/sangsung/002.jpg"/><em>铂光金</em><img class="choose_tip" src="img/S7-Edge_10.jpg" alt="" /></span>
+				</div>
+				<div class="package">
+					<i>套餐类型</i>
+					<span><em>官方标配</em><img class="choose_tip" src="img/S7-Edge_10.jpg" alt="" /></span>
+				</div>
+				<div class="capacity">
+					<i>内存容量</i>
+					<span class="32GB"><em>32GB</em><img class="choose_tip" src="img/S7-Edge_10.jpg" alt="" /></span>
+					<span class="64GB"><em>64GB</em><img class="choose_tip" src="img/S7-Edge_10.jpg" alt="" /></span>
+				</div>
+				<div class="verson">
+					<i>版本类型</i>
+					<span><em>中国大陆</em><img class="choose_tip" src="img/S7-Edge_10.jpg" alt="" /></span>
+				</div>
+				<div class="buyWay">
+					<i>购买方式</i>
+					<span><em>裸机</em><img class="choose_tip" src="img/S7-Edge_10.jpg" alt="" /></span>
+					<span><em>购机送</em><img class="choose_tip" src="img/S7-Edge_10.jpg" alt="" /></span>
+				</div>
+				<div class="buyNum">
+					<i>数量</i>
+					<input type="text" name="" id="" value="1" />
+					<em>库存1256件</em>
+				</div>
+				<button class="buyNow">立即购买</button>
+				<button class="buyLater">加入购物车</button>
+			</div>
+			<div class="info_right">
+				<img src="img/sangsung/S7-Edge_1_10.jpg"/>
+			</div>
+		</div>
+		<div class="success">
+			<p class="close"><span>X</span></p>
+			<div class="success_1">
+				<img src="img/sangsung/success_03.jpg"/>
+				<h3>成功加入购物车！</h3>
+				<p>您可以去<a href="shopCar.html">购物车</a>结算，或者先使用<span> 天猫APP </span>领取新用户福利礼包，立即下载<i>天猫APP</i></p>
+			</div>
+			<p class="s_other">达人的购物车里都有啥</p>
+			<img src="img/sangsung/success_07.jpg"/>
+		</div>
+		<div class="footer">
+				<div class="protect">
+					<img src="img/shop/other_14.jpg"/>
+					<p>
+						<i>品质保障</i><br />
+						<span>品质护航 购物无忧</span>
+					</p>
+					<img src="img/shop/other_16.jpg"/>
+					<p>
+						<i>七天无理由退换货</i><br />
+						<span>品质护航 购物无忧</span>
+					</p>
+					<img src="img/shop/other_19.jpg"/>
+					<p>
+						<i>特色服务体验</i><br />
+						<span>品质护航 购物无忧</span>
+					</p>
+					<img src="img/shop/other_11.jpg"/>
+					<p style="border: 0;">
+						<i>帮助中心</i><br />
+						<span>品质护航 购物无忧</span>
+					</p>
+				</div>
+				<div style="overflow: hidden;">
+					<ul>
+						<li><a href="" style="color: #000000;">购物指南</a></li>
+						<li><a href="">免费注册</a></li>
+						<li><a href="">开通支付宝</a></li>
+						<li><a href="">支付宝充值</a></li>
+					</ul>
+					<ul>
+						<li><a href="" style="color: #000000;">天猫保障</a></li>
+						<li><a href="">发票保障</a></li>
+						<li><a href="">售后规则</a></li>
+						<li><a href="">缺货赔付</a></li>
+					</ul>
+					<ul>
+						<li><a href="" style="color: #000000;">支付方式</a></li>
+						<li><a href="">快捷支付</a></li>
+						<li><a href="">信用卡</a></li>
+						<li><a href="">支付宝</a></li>
+						<li><a href="">余额宝</a></li>
+						<li><a href="">蚂蚁花呗</a></li>
+					</ul>
+					<ul>
+						<li><a href="" style="color: #000000;">商家服务</a></li>
+						<li><a href="">商家入驻</a></li>
+						<li><a href="">商家中心</a></li>
+						<li><a href="">天猫智库</a></li>
+						<li><a href="">天猫规则</a></li>
+						<li><a href="">物流服务</a></li>
+						<li><a href="">喵言妙语</a></li>
+						<li><a href="">运营服务</a></li>
+					</ul>
+					<div class="phoneTmall">
+						<p>手机天猫</p>
+						<img src="img/shop/other_26.jpg"/>
+					</div>
+				</div>
+				<div class="last">
+					<p class="p1">关于天猫 帮助中心 开放平台 诚聘英才 联系我们 网站合作 法律声明 知识产权 廉正举报 规则意见征集 </p>
+					<p class="p2">阿里巴巴集团| 淘宝网 | 天猫 | 聚划算 | 全球速卖通 | 阿里巴巴国际交易市场| 1688 | 阿里妈妈 | 阿里旅行·去啊 | 阿里云计算 | YunOS | 阿里通信 | 万网 | 高德 | 优视 | 友盟 | 虾米 | 天天动听 | 来往 | 钉钉 | 支付宝</p>
+					<p class="p3"><span>增值电信业务经营许可证： 浙B2-20110446</span> <span>网络文化经营许可证：浙网文[2015]0295-065号</span> <span>互联网医疗保健信息服务 审核同意书 浙卫网审【2014】6号</span></p>
+					<p class="p4">互联网药品信息服务资质证书编号：浙-（经营性）-2012-0005</p>
+					<p class="p5">© 2003-2016 TMALL.COM 版权所有</p>
+					<p class="p6"><img src="img/shop/other_34.jpg"/><img src="img/shop/other_36.jpg"/></p>
+					<div><img src="img/shop/other_30.jpg"/></div>
+				</div>
+			</div>
+	</body>
+</html>

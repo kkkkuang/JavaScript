@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>欢迎登陆</title>
+		<link rel="stylesheet" type="text/css" href="css/content.css"/>
+		<link rel="stylesheet" type="text/css" href="css/login&register.css"/>
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var userName=$.cookie('user');
+				//console.log(userName);
+				var psw=$.cookie('pass');
+				$('.button_2').click(function(){
+					var name=$('.user input').val();
+					var pas=$('.pass input').val();
+					if(name==''){
+						alert('用户名不能为空！');
+						return;
+					}else if(pas==''){
+						alert('密码不能为空！')
+						return;
+					}
+					
+					if(name!=userName||pas!=psw){
+						alert('用户名或者密码错误');
+						return
+					}else{
+						$('.button_2').attr('href','index.html');
+					}
+				});
+			})
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="top">
+				<img src="img/login/login_03.jpg"/>
+			</div>
+			<div class="center">
+				<img src="img/login/login_07.jpg"/>
+				<div class="loginInfo">
+					<p><img src="img/login/login_13.jpg"/>扫码登录更安全</p>
+					<b>密码登录</b>
+					<div class="user"><input   type="text" name="" id="" value="" placeholder="手机号/会员名/邮箱"/><br /></div>
+					<div class="pass"><input  type="password" name="" id="" value="" /></div>
+					<div class="userP"><img src="img/login/login_18.jpg"/></div>
+					<div class="passP"><img src="img/login/login_22.jpg"/></div>
+					<a href="" class="button_2">登 录</a>
+					<input class="remPass" type="checkbox" name="" id="" value="" /><i>记住密码</i>
+				
+					<a href="register.html" class="loginFree">免费注册</a>
+					<span>忘记密码</span>
+					<div class="erweimaD"><img src="img/login/login_10.jpg"/></div>
+				</div> 
+			</div>
+			<div class="last" style="background: #fff;width:1300px;border: 0;margin-right:125px ;">
+						<p class="p1">关于天猫 帮助中心 开放平台 诚聘英才 联系我们 网站合作 法律声明 知识产权 廉正举报 规则意见征集 </p>
+						<p class="p2">阿里巴巴集团| 淘宝网 | 天猫 | 聚划算 | 全球速卖通 | 阿里巴巴国际交易市场| 1688 | 阿里妈妈 | 阿里旅行·去啊 | 阿里云计算 | YunOS | 阿里通信 | 万网 | 高德 | 优视 | 友盟 | 虾米 | 天天动听 | 来往 | 钉钉 | 支付宝</p>
+						<p class="p3"><span>增值电信业务经营许可证： 浙B2-20110446</span> <span>网络文化经营许可证：浙网文[2015]0295-065号</span> <span>互联网医疗保健信息服务 审核同意书 浙卫网审【2014】6号</span></p>
+						<p class="p4"><span>互联网药品信息服务资质证书编号：浙-（经营性）-2012-0005</span></p>
+						<p class="p5"><span>© 2003-2016 TMALL.COM 版权所有</span></p>		
+			</div>
+		</div>
+	</body>
+</html>

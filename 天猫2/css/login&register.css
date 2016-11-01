@@ -1,0 +1,380 @@
+	*{
+					margin: 0;
+					padding: 0;
+				}
+			.last p{
+				color: #000!important;
+				font-size: 14px!important;
+			}
+			.last p span{
+				color: #666!important;
+			}
+			.top{
+				width: 1423px;
+				height: 88px;
+				background: #fff;
+			}
+			.top img{
+				margin:30px 0  0 126px ;
+			}
+			.center{
+				width: 1423px;
+				height: 595px;
+				background: #19120e;
+				margin-bottom: 45px;
+			}
+			.center>img{
+				float: left;
+				margin: 0 0 30px 117px;
+			}
+			.loginInfo{
+				float: left;
+				width: 351px;
+				height: 404px;
+				background: #fff;
+				margin-top: 91px;
+				position: relative;
+			}
+			.loginInfo p{
+				color: #df9c1f;
+				width: 141px;
+				height: 26px;
+				border: 1px solid #f3d995;
+				text-align: center;
+				margin: 10px 0 0 149px;
+				background: #fefcee;
+				font-size: 12px;
+				line-height: 26px;
+			}
+			.loginInfo p img{
+				float: left;
+				display: block;
+				margin: 5px 0 0 16px;
+			}
+			.loginInfo b{
+				margin:0 0 26px 25px;
+				display: block;
+			}
+			.loginInfo .user,.loginInfo .pass{
+				width: 298px;
+				height: 40px;
+				margin: 0 0 25px 26px ;
+				border: 1px solid #cbcbcb;
+				background: #FFFFFF;
+			}
+			.user input,.pass input{
+				width: 250px;
+				height: 40px;
+				border: 0;
+				margin-left: 48px;
+				outline: none;
+			}
+			.userP,.passP{
+				width: 40px;
+				height: 40px;
+				background: #ddd;
+				text-align: center;
+				line-height: 40px;
+				position: absolute;
+				left:27px;
+			}
+			.userP{top: 86px;}
+			.passP{top: 153px;}
+			.userP img,.passP img{
+				margin-top: 10px;
+			}
+			.loginInfo .button_2{
+				width: 300px;
+				height:42px;
+				background: #af0000;
+				border-radius: 1px;
+				color: white;
+				text-align: center;
+				line-height: 42px;
+				margin: 0 0 0 26px;
+				border: 0;
+				font-size: 20px;
+				display: block;
+				text-decoration: none;
+				
+			}
+			.loginInfo span{
+				font-size: 12px;
+				float: right;
+				display: block;
+				margin: 28px 0 0 14px;
+			}
+			.loginFree{
+				margin-right:37px !important;
+				font-size: 12px;
+				float: right;
+				display: block;
+				margin: 28px 0 0 14px;
+				text-decoration: none;
+			}
+			.erweimaD{
+				position: absolute;
+				top: 9px;
+				right: 6px;
+			}
+			.p2{
+				margin: 15px 0 15px 100px!important;
+			}
+			.remPass {
+				font-size: 12px;
+				float: left;
+				margin: 29px 0 0 26px;
+			}
+			.loginInfo i{
+				font-size: 12px;
+				font-style: normal;
+				display: block;
+				float: left;
+				margin: 28px 0 0 5px;
+			}
+			em{
+				display: block;
+				position: absolute;
+				font-size: 12px;
+				width: 90px;
+				height: 20px;
+				border: 1px solid #ccc;
+				font-style: normal;
+				bottom: 100px;
+				left: 100px;
+				line-height: 20px;
+				text-align: center;
+				border-radius: 10px;
+				background: #F5F5F5;
+				cursor: pointer;
+			}
+			body{font-family: "微软雅黑";}
+			.r_top{
+				width: 1423px;
+				height: 100px;
+				background: #FFFFFF;
+				box-shadow:0px 5px 10px #eeeeee;
+			}
+			.r_top img{
+				display: block;
+				margin:35px 0 0 115px;
+				float: left;
+			}
+			.r_top p{
+				float: left;
+				margin: 42px 0 0 25px;
+				padding-left: 25px;
+				border-left:1px solid #bbbbbb;
+				font-weight: bold;
+				letter-spacing: 3px;
+				color: #000;
+			}
+			.r_top span{
+				float: right;
+				margin: 50px 115px 0 0;
+				font-size: 14px;
+				color: #969494;
+			}
+			.r_top span a{
+				color: #000;
+				text-decoration: none;
+			}
+			.r_center{
+				overflow: hidden;
+				width: 1423px;
+			}
+			.r_c_left{
+				width: 400px;
+				margin:50px 104px 0 305px;
+				float: left;
+				position: relative;
+			}
+			.r_c_right{
+				width: 213px;
+				margin-top: 50px;
+				padding-left: 90px;
+				border-left:1px solid #e6e6e6;
+				float: left;
+			}
+			.company{
+				margin: 50px 0 35px 30px;
+				text-align: center;
+				width: 160px;
+				height: 60px;
+				border-bottom: 1px solid #ccc;
+			}
+			.company img{float: left;}
+			.company span{
+				margin: 5px 0 0 18px;
+				display: block;
+				float: left;
+			}
+			.global{
+				margin-left: 30px;
+				width: 200px;
+				height: 60px;
+			}
+			.global img{
+				margin-top: 10px;
+				float: left;
+				}
+			.global span{
+				font-size: 14px;
+				margin-left: 15px;
+				width: 115px;
+				float: left;
+				margin-top:5px;
+			}
+			.r_c_left form>div{
+				width: 398px;
+				height:52px;
+				border: 1px solid #dddddd;
+			}
+			.r_c_left form>div>input{
+				border: 0;
+				outline: none;
+			}
+			.r_tips {
+				height: 32px;
+			}
+			.r_tips span{
+				font-size: 12px;
+				line-height: 32px;
+				font-size: 12px;
+				color: #CCCCCC;
+				height: 32px;
+				display: none;
+			}
+			.r_tips img{
+				vertical-align: middle;
+				margin-right: 8px;
+				display: block;
+				float: left;
+				margin-top:8px ;
+			}
+			.email{
+				font-size: 14px;
+				position: absolute;
+				right: 0;
+				color: blue;
+				top:320px ;
+				display: block;
+			}
+			.r_c_left form>div>span{
+				width: 105px;
+				height: 52px;
+				line-height: 52px;
+				display: block;
+				float: left;
+				padding-left: 25px;
+				font-size: 14px;
+			}
+			.r_c_left form>div>input{
+				width: 268px;
+				line-height: 52px;
+				height: 52px;
+				float: left;
+				font-size: 14px;
+			}
+			select{
+				width:120px;
+				height: 52px;
+				float: left;
+				line-height: 52px;
+				text-align: center;
+				border-right:1px solid #ccc;
+				border-left:0;
+				border-top:0;
+				border-bottom:0;
+				outline: none;
+				padding-left: 20px;
+			}
+			.identify{
+				position: relative;
+			}
+			.identify i{
+				position: absolute;
+				width: 80px;
+				height: 52px;
+				top: 0;
+				right: 0;
+				text-align: center;
+				line-height: 52px;
+				display: block;
+				font-style: normal;
+				font-size: 30px;
+				font-family: hakuyoxingshu7000;
+			}
+			.phoneIdentify{
+				position: relative;
+			}
+			.phoneIdentify i{
+				position: absolute;
+				width: 110px;
+				height: 46px;
+				top: 3px;
+				right: 3px;
+				text-align: center;
+				line-height: 52px;
+				display: block;
+				background: #f2f2f2;
+				color: #000;
+				font-style: normal;
+				font-size: 14px;
+			}
+			.check{
+				margin: 34px 0;
+			}
+			.check span{
+				margin-left: 10px;
+				font-size: 14px;
+			}
+			.check span b{
+				font-weight: normal;
+				color: blue;
+			}
+			.r_center .button_1{
+				width: 400px;
+				height: 54px;
+				background: #ee2222;
+				color: white;
+				text-align: center;
+				line-height: 54px;
+				font-size: 24px;
+				border: 0;
+				outline: none;
+				display: block;
+				text-decoration: none;
+			}
+			.r_bottom{
+				width: 1210px;
+				height: 117px;
+				border-top: 1px solid #e6e6e6;
+				margin: 60px 0  0 115px;
+			}
+			.r_about{
+				margin: 35px 0 20px 0;
+				text-align: center;
+				font-size: 14px;
+				color: #999;
+			}
+			.r_more{
+				text-align: center;
+				font-size: 14px;
+				color: #999;
+			}
+			.r_center strong{
+				font-weight: normal;
+				position: absolute;
+				top: 20px;
+				right: 20px;
+				display: none;
+			}
+			
+			
+			.changeBorder{
+				border: 1px solid red!important;
+			}
+			.changeColor{
+				color: red!important;
+			}

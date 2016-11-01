@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>购物车</title>
+		<link rel="stylesheet" type="text/css" href="css/head.css"/>
+		<link rel="stylesheet" type="text/css" href="css/search&Info.css"/>
+		<link rel="stylesheet" type="text/css" href="css/content.css"/>
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/head.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				//滑动效果
+				$('.s_top li').mouseenter(function(){
+					var left=$(this).position().left+100;
+					$('.wrap_line').stop().animate({
+						left:left
+					},100)
+				})
+				
+			
+				//判断是否有cookie，并获取cookie
+				var cook=$.cookie('name');
+				var cook2=$.cookie('name2');
+				//存在一个商品的情况
+				if(cook){
+					$('.phone_name').text(cook);
+					$('.s_info_4 img').attr('src',$.cookie('src'));
+					$('.s_info_3_1 i').text($.cookie('phone_color'));
+					$('.s_info_3_2 i').text($.cookie('verson'));
+					$('.s_info_3_3 i').text($.cookie('package'));
+					$('.s_info_3_4 i').text($.cookie('capacity'));
+					$('.s_info_6 input').val($.cookie('buyNum'));
+					$('.s_info_5 span').text($.cookie('price'));
+				}else{
+					$('.bannerPrice').hide();
+					$('.shopInfo').hide();
+				}
+				//第二个商品
+				if(cook2){
+					$('.shopInfo').clone(true).insertAfter('.shopInfo').addClass('shopInfo2');
+					$('.shopInfo2 .phone_name').text(cook2);
+					$('.shopInfo2 .s_info_4 img').attr('src',$.cookie('src2'));
+					$('.shopInfo2 .s_info_3_1 i').text($.cookie('phone_color2'));
+					$('.shopInfo2 .s_info_3_2 i').text($.cookie('verson2'));
+					$('.shopInfo2 .s_info_3_3 i').text($.cookie('package2'));
+					$('.shopInfo2 .s_info_3_4 i').text($.cookie('capacity2'));
+					$('.shopInfo2 .s_info_6 input').val($.cookie('buyNum2'));
+					$('.shopInfo2 .s_info_5 span').text($.cookie('price2'));
+					
+				}
+				
+				//购买数量增加
+				//第一件商品
+				var sum=$('.s_info_6 input').val();
+				var onePrice=$('.shopInfo:eq(0) .s_info_5 span').text();
+				console.log(onePrice)
+				var onePrice2=$('.shopInfo:eq(1) .s_info_5 span').text();
+				$('.shopInfo:eq(0) .s_info_7 span').text(sum*onePrice+'.00');
+				$('.shopInfo:eq(1) .s_info_7 span').text(sum*onePrice2+'.00');
+				$(' .s_info_6_1').click(function(){
+					var num=$(this).siblings('input').val();
+					var price=$(this).parent().siblings('.s_info_5').find('span').text();
+					num--;
+					if(num<=1){
+						num=1
+					}
+					$(this).siblings('input').val(num);
+					$(this).parent().siblings('.s_info_7').find('span').text(num*price+'.00');
+				})
+				$('.s_info_6_2').click(function(){
+					var num=$(this).siblings('input').val();
+					var price=$(this).parent().siblings('.s_info_5').find('span').text();
+					num++;
+					$(this).siblings('input').val(num);
+					$(this).parent().siblings('.s_info_7').find('span').text(num*price+'.00');
+				})
+				
+				
+				//勾选
+				$('#chooseAll,#chooseAll2').click(function(){
+					if($('#chooseAll').is(':checked')){
+						if(cook2){
+							var money1=parseInt($('.shopInfo:eq(0) .s_info_7 span').text());
+							var money2=parseInt($('.shopInfo:eq(1) .s_info_7 span').text());
+							var money=money1+money2;
+						}else{
+							var money=parseInt($('.shopInfo:eq(0) .s_info_7 span').text());
+						}
+						
+						$('.settlement em').text(money)
+						$('.s_content input').prop('checked',true);
+						$('.s_info').addClass('changeB');
+						
+					}else{
+						$('.settlement em').text('0.00');
+						$('.s_content input').prop('checked',false);
+						$('.s_info').removeClass('changeB');
+					}
+				})
+				$('.chooseThis').click(function(){
+					var money=parseInt($(this).parents('.s_info').find('.s_info_7').children('span').text());
+					var allMoney=parseInt($('.settlement em').text());
+					if($(this).is(':checked')){
+						$(this).parents('.s_info').siblings().find('input').prop('checked',true);
+						$(this).parents('.s_info').addClass('changeB');
+						allMoney+=money;
+						$('.settlement em').text(allMoney);
+					}else{
+						$(this).parents('.s_info').siblings().find('input').prop('checked',false);
+						$(this).parents('.s_info').removeClass('changeB');
+						allMoney-=money;
+						$('.settlement em').text(allMoney);
+					}
+				})
+				
+				$('.shopStore input').click(function(){
+					var money=parseInt($(this).parents('.shopInfo').find('.s_info_7').children('span').text());
+					
+					var allMoney=parseInt($('.settlement em').text());
+					if($(this).is(':checked')){
+						$(this).parents('.shopStore').siblings().find('input').prop('checked',true);
+						$(this).parents('.shopStore').siblings().addClass('changeB');
+						allMoney+=money;
+						$('.settlement em').text(allMoney);
+					}else{
+						$(this).parents('.shopStore').siblings().find('input').prop('checked',false);
+						$(this).parents('.shopStore').siblings().removeClass('changeB');
+						allMoney-=money;
+						$('.settlement em').text(allMoney);
+					}
+				})
+				
+				$('.del').click(function(){
+					var index=$(this).parents('.shopInfo').index()-1;
+					console.log(index);
+					$(this).parents('.shopInfo').hide();
+					if(index==1){
+						$.cookie('name',null,{expires:-1});
+						$.cookie('price',null,{expires:-1})
+						$.cookie('phone_color',null,{expires:-1});
+						$.cookie('src',null,{expires:-1})
+						$.cookie('package',null,{expires:-1});
+						$.cookie('capacity',null,{expires:-1});
+						$.cookie('verson',null,{expires:-1});
+						$.cookie('buyWay',null,{expires:-1});
+						$.cookie('buyNum',null,{expires:-1});
+					}else if(index==2){
+						$.cookie('name2',null,{expires:-1});
+						$.cookie('price2',null,{expires:-1})
+						$.cookie('phone_color2',null,{expires:-1});
+						$.cookie('src2',null,{expires:-1})
+						$.cookie('package2',null,{expires:-1});
+						$.cookie('capacity2',null,{expires:-1});
+						$.cookie('verson2',null,{expires:-1});
+						$.cookie('buyWay2',null,{expires:-1});
+						$.cookie('buyNum2',null,{expires:-1});
+					}
+				})
+				
+			})
+		</script>
+	</head>
+	<body>
+		<div class="header">
+				<div class="headerLeft">
+					<span>喵，欢迎来到天猫</span>
+					<a href="login.html" class="p_login">请登录</a>
+					<a href="register.html" class="p_register">免费注册</a>
+					<a href="#" class="p_click">退出登录</a>
+				</div>
+				<div class="headerRight">
+					<ul class="headerInfo">
+						<li class="myTaobao"><a href="#">我的淘宝</a>
+							<ul class="myTaobaoInfo">
+								<li><a href="#">已买到的宝贝</a></li>
+								<li><a href="#">已卖出的宝贝</a></li>
+							</ul>
+						</li>
+						<li><img src="img/header/tmal_headl_03.jpg"/><a href="#">我关注的品牌</a></li>
+						<li><img src="img/header/tmal_headl_05.jpg"/><a href="#">购物车</a></li>
+						<li class="mycollect"><a href="#" class="headerBorder">收藏夹</a>
+							<ul class="mycollectInfo">
+								<li><a href="#">收藏的宝贝</a></li>
+								<li><a href="#">收藏的店铺</a></li>
+							</ul>
+						</li>
+					</ul>
+					
+					<ul class="headerOther">
+						<li class="mycode"><img src="img/header/tmall_head_07.jpg"/><a href="">手机版</a>
+							<ul class="code">
+								<li><img src="img/erweima_03.jpg"/></li>
+							</ul>
+						</li>
+						<li><a href="#">淘宝网</a></li>
+						<li><a href="#">企业购</a></li>
+						<li><a href="#">商家支持</a></li>
+						<li class="myNav"><img src="img/header/tmall_head_10.jpg"/><a href="#">网站导航</a>
+							<div class="webNav">
+								<div class="webNavLeft">
+									<p>热点推荐Hot</p>
+									<ul class="webNav01">
+										<li>天猫超市<img src="img/tips_03.jpg" alt="" /></li>
+										<li>女装新品</li>
+										<li>试美妆</li>
+										<li>精明妈咪<img src="img/tips_07.jpg" alt="" /></li>
+										<li>会员积分</li>
+									</ul>
+									<ul class="webNav02">
+										<li>喵鲜生</li>
+										<li>酷玩街<img src="img/tips_07.jpg" alt="" /></li>
+										<li>运动新品</li>
+										<li>吃乐辉<img src="img/tips_03.jpg" alt="" /></li>
+										<li>天猫国际</li>
+									</ul>
+									<ul class="webNav03">
+										<li>科技新品<img src="img/tips_03.jpg" alt="" /></li>
+										<li>内衣新品</li>
+										<li>时尚先生<img src="img/tips_07.jpg" alt="" /></li>
+										<li>企业采购</li>
+									</ul>
+								</div>
+								<div class="webNavMarket">
+									<p>行业市场 Market</p>
+									<ul>
+										<li>美妆<img src="img/tips_03.jpg" alt="" /></li>
+										<li>女鞋</li>
+										<li>运动</li>
+										<li>食品</li>
+									</ul>
+									<ul>
+										<li>电器<img src="img/tips_07.jpg" alt="" /></li>
+										<li>男鞋</li>
+										<li>母婴</li>
+										<li>配饰<img src="img/tips_03.jpg" alt="" /></li>
+									</ul>
+									<ul>
+										<li>女装<img src="img/tips_07.jpg" alt="" /></li>
+										<li>内衣</li>
+										<li>家装</li>
+										<li>汽车<img src="img/tips_07.jpg" alt="" /></li>
+									</ul>
+								</div>
+								<div class="webNavBrand">
+									<p>品牌风尚 Brand</p>
+									<ul>
+										<li>尚天猫</li>
+										<li>天猫原创</li>
+									</ul>
+									<ul>
+										<li>大牌街</li>
+										<li>什么牌子好</li>
+									</ul>
+									<ul>
+										<li>潮牌街</li>
+									</ul>
+								</div>
+								<div class="webNavHelp">
+									<p>服务指南Help</p>
+									<ul>
+										<li>服务中心</li>
+										<li>品质保障</li>
+										<li>特色服务</li>
+										<li>7天退换货</li>
+									</ul>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		<div class="right_banner">
+				<div class="img1">
+					<img src="img/content/bannerRight_03.jpg"/>
+				</div>
+				<div class="img2">
+					<img src="img/content/bannerRight_07.jpg"/>
+					<span>购物车</span>
+				</div>
+				<div class="img9">
+					<img  src="img/content/bannerRght_03.jpg"/>
+				</div>
+				<div class="img3">
+					<img  src="img/content/bannerRight_09.jpg"/>
+				</div>
+				<div class="img4">
+					<img src="img/content/bannerRight_12.jpg"/>
+				</div>
+				<div class="img5">
+					<img src="img/content/bannerRight_14.jpg"/>
+				</div>
+				<div class="img6">
+					<img src="img/content/bannerRight_17.jpg"/>
+				</div>
+				<div class="img7">
+					<img src="img/content/bannerRight_19.jpg"/>
+				</div>
+				<div class="img8">
+					<img src="img/content/bannerRight_23.jpg"/>
+				</div>
+				<div class="img10">
+					<img src="img/content/bannerB.png"/>
+				</div>
+			</div>
+		<div class="search">
+				<a href="index.html" class="logo">
+				</a>
+				<div class="searchButton">
+					<input class="input" type="text" name="" id="" value="" placeholder=" 秋冬衣服不可少" />
+					<input class="button" type="button" name="" id="" value="搜索" />
+				</div>
+				<div class="searchTip">
+					<a href="#">外套</a>
+					<a href="#">坚果</a>
+					<a href="#">四件套</a>
+					<a href="#">洗衣机</a>
+					<a href="#">打底裤</a>
+					<a href="#">短靴</a>
+					<a href="#">双肩包</a>
+					<a href="#">夹克</a>
+					<a href="#">polo衫</a>
+					<a href="#">吹风机</a>
+				</div>
+		</div>
+		<div class="s_content">
+			<div class="s_top">
+				<ul>
+					<li style="cursor: pointer;">全部商品 1</li>
+					<li style="cursor: not-allowed;">降价商品 0</li>
+					<li style="cursor: not-allowed;">库存紧张 0</li>
+				</ul>
+				<div class="wrap_line"></div>
+				<p>已选商品(不含运费) <span>0.00</span> <a href="xiangqing2.html">继续买</a></p>
+			</div>
+			<div class="bannerPrice">
+				<input type="checkbox" name="" id="chooseAll" value="" />全选
+				<span>商品信息</span>
+				<span>单价</span>
+				<span>数量</span>
+				<span>金额</span>
+				<span>操作</span>
+			</div>
+			<div class="shopInfo">
+				 <div class="shopStore">
+					 <input type="checkbox" name="" id="" value="" />
+					 <span><img class="shopStore_1" src="img/sangsung/shopCar_06.jpg"/>三星官方旗舰店<img class="shopStore_2" src="img/sangsung/shopCar_03.jpg" alt="" /></span>
+				 </div>
+				 <div class="s_info">
+				 	<div class="s_info_1">
+				 		<p><span>下单减</span><i>已享优惠：省300.00元</i>满4000，减300</p>
+				 	</div>
+				 	<div class="s_info_2">
+					 	<input type="checkbox" name="" id="" value="" class="chooseThis" />
+					 	<div class="s_info_4">
+					 		<img src=""/>
+					 	</div>
+					 	<p class="phone_name">
+					 		立减300 Samsung/三星 Galaxy Note7 Edge SM-G9350手机
+					 	</p>
+					 	<div class="s_info_3">
+					 		<span class="s_info_3_1">机身颜色:<i></i></span>
+					 		<span class="s_info_3_2">版本类型:<i></i></span>
+					 		<span class="s_info_3_3">套餐类型:<i></i></span>
+					 		<span class="s_info_3_4">存储容量:<i></i></span>
+					 	</div>
+					 	<div class="s_info_5">
+					 		￥<span></span>
+					 	</div>
+					 	<div class="s_info_6">
+					 		<span class="s_info_6_1">-</span>
+					 		<span class="s_info_6_2">+</span>
+					 		<input type="text" name="" id="" value="" />
+					 	</div>
+					 	<div class="s_info_7">
+					 		￥<span></span>
+					 	</div>
+					 	<div class="s_info_8">
+					 		<span>移入收藏夹</span>
+					 		<span class="del" style="cursor: pointer;">删除</span>
+					 	</div>
+				 	</div>
+				 </div>
+			</div>
+			<div class="settlement">
+				<p>
+					<input type="checkbox" name="" id="chooseAll2" value="" />
+					<span>全选</span>
+					<span>删除</span>
+					<span>移入收藏夹</span>
+					<span>分享</span>
+					<span>已选商品<i>1</i>件</span>
+					<span>合计(不含运费)：</span>
+					<span>￥<em>0.00</em></span>
+					<button>结算</button>
+				</p>
+			</div>
+		</div>
+		<div class="footer">
+				<div class="protect">
+					<img src="img/shop/other_14.jpg"/>
+					<p>
+						<i>品质保障</i><br />
+						<span>品质护航 购物无忧</span>
+					</p>
+					<img src="img/shop/other_16.jpg"/>
+					<p>
+						<i>七天无理由退换货</i><br />
+						<span>品质护航 购物无忧</span>
+					</p>
+					<img src="img/shop/other_19.jpg"/>
+					<p>
+						<i>特色服务体验</i><br />
+						<span>品质护航 购物无忧</span>
+					</p>
+					<img src="img/shop/other_11.jpg"/>
+					<p style="border: 0;">
+						<i>帮助中心</i><br />
+						<span>品质护航 购物无忧</span>
+					</p>
+				</div>
+				<div style="overflow: hidden;">
+					<ul>
+						<li><a href="" style="color: #000000;">购物指南</a></li>
+						<li><a href="">免费注册</a></li>
+						<li><a href="">开通支付宝</a></li>
+						<li><a href="">支付宝充值</a></li>
+					</ul>
+					<ul>
+						<li><a href="" style="color: #000000;">天猫保障</a></li>
+						<li><a href="">发票保障</a></li>
+						<li><a href="">售后规则</a></li>
+						<li><a href="">缺货赔付</a></li>
+					</ul>
+					<ul>
+						<li><a href="" style="color: #000000;">支付方式</a></li>
+						<li><a href="">快捷支付</a></li>
+						<li><a href="">信用卡</a></li>
+						<li><a href="">支付宝</a></li>
+						<li><a href="">余额宝</a></li>
+						<li><a href="">蚂蚁花呗</a></li>
+					</ul>
+					<ul>
+						<li><a href="" style="color: #000000;">商家服务</a></li>
+						<li><a href="">商家入驻</a></li>
+						<li><a href="">商家中心</a></li>
+						<li><a href="">天猫智库</a></li>
+						<li><a href="">天猫规则</a></li>
+						<li><a href="">物流服务</a></li>
+						<li><a href="">喵言妙语</a></li>
+						<li><a href="">运营服务</a></li>
+					</ul>
+					<div class="phoneTmall">
+						<p>手机天猫</p>
+						<img src="img/shop/other_26.jpg"/>
+					</div>
+				</div>
+				<div class="last">
+					<p class="p1">关于天猫 帮助中心 开放平台 诚聘英才 联系我们 网站合作 法律声明 知识产权 廉正举报 规则意见征集 </p>
+					<p class="p2">阿里巴巴集团| 淘宝网 | 天猫 | 聚划算 | 全球速卖通 | 阿里巴巴国际交易市场| 1688 | 阿里妈妈 | 阿里旅行·去啊 | 阿里云计算 | YunOS | 阿里通信 | 万网 | 高德 | 优视 | 友盟 | 虾米 | 天天动听 | 来往 | 钉钉 | 支付宝</p>
+					<p class="p3"><span>增值电信业务经营许可证： 浙B2-20110446</span> <span>网络文化经营许可证：浙网文[2015]0295-065号</span> <span>互联网医疗保健信息服务 审核同意书 浙卫网审【2014】6号</span></p>
+					<p class="p4">互联网药品信息服务资质证书编号：浙-（经营性）-2012-0005</p>
+					<p class="p5">© 2003-2016 TMALL.COM 版权所有</p>
+					<p class="p6"><img src="img/shop/other_34.jpg"/><img src="img/shop/other_36.jpg"/></p>
+					<div><img src="img/shop/other_30.jpg"/></div>
+				</div>
+			</div>
+	</body>
+</html>
