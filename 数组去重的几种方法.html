@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	function clearArraySame1(arr){
+		//利用Set的不可重复性，
+		//Array.from(),将一个类数组对象转化为数组,如arguments
+		 return Array.from(new Set(arr));
+//		 return new Set(arr);
+	}
+	
+//	var arr2=clearArraySame1([12,12,13,13,14])
+	
+	function clearArraySame2(arr){
+		var arr2=[];
+		for (var i = 0; i < arr.length; i++) {
+			//利用了数组的index方法，如果未找到则返回-1
+			if(arr2.indexOf(arr[i])==-1){
+				arr2.push(arr[i]);
+			}
+		}
+		return arr2;
+	}
+//	var Arr3=clearArraySame2([12,12,13,13,14,5,17,5])
+//	console.log(Arr3);
+
+	function clearArraySame3(arr){
+		var arr2=[];
+		var n={};  //定义一个hash表
+		for (var i = 0; i < arr.length; i++) {
+			//判断哈希表中是否有当前值，若没有则加入hash表中，并将其放入临时数组中
+			if(!n[arr[i]]){
+				arr2.push(arr[i]);
+				n[arr[i]]=true;//存入哈希表
+			}
+		}
+		return arr2;
+	}
+	var Arr3=clearArraySame2([12,12,13,13,14,5,17,5])
+	console.log(Arr3);
+</script>
