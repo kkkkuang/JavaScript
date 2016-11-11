@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			{{ message }}
+		</div>
+		<div id="app-2">
+			<!-- v-binb='' ,绑定指令     -->
+		  <span v-bind:title="message"> 
+		    Hover your mouse over me for a few seconds to see my dynamically bound title!
+		  </span>
+		</div>
+		
+		<div id="app-3">
+			<!-- v-if 判断指令   -->
+			<p v-if='seen'>
+				看得到我
+			</p>
+		</div>
+		
+		<div class="app-4">
+			<ol>
+				<!-- v-for 循环指令 -->
+				<li v-for='todo in todos'>
+					{{ todo.text }}
+				</li>
+			</ol>
+		</div>
+		 
+		 <!-- v-on:事件，绑定一个事件类型=事件名 整个过程没有接触Dom结构 -->
+		<div id="app-5">
+			<p>{{message}}</p>
+			<button v-on:click='reversemessage'>Reverse Message</button>
+		</div>
+		<!-- v-model 制定输入框的与其他文本状态双向绑定 -->
+		<div id="app-6">
+			<p>
+				{{message}}
+			</p>
+			<input type="text" v-model='message'/>
+		</div>
+		
+		<!--<ul>
+			<todo-item></todo-item>
+			<todo-item></todo-item>
+		</ul>-->
+		<ul>
+			  <!-- Create an instance of the todo-item component -->
+			  <todo-item></todo-item>
+		</ul>
+	</body>
+</html>
+<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+//	Vue.component('todo-item',{
+//		template:'<li>this is a todo-item <li>'
+//	})
+	Vue.component('todo-item', {
+ 		template: '<li>This is a todo</li>'
+	})
+	
+	var app6 = new Vue({
+		el:'#app-6',
+		data:{
+			message:'hello world',
+		}
+	})
+
+	var app5 = new Vue({
+		el:'#app-5',
+		data:{
+			message:'hello js!'
+		},
+		methods:{
+			reversemessage : function(){
+				this.message = this.message.split('').reverse().join('')
+			}
+		}
+		
+	})
+
+	var app4 = new Vue({
+		el:'.app-4',
+		data:{
+			todos:[
+				{text:'learn js'},
+				{text:'learn vue'},
+				{text:'earn money'},
+			]
+		}
+	})
+
+	var app = new Vue({
+		el:'#app',
+		data:{
+			message:'hello a Vue!'
+		}
+	})
+	
+	var app2 = new Vue({
+		el:'#app-2',
+		data:{
+			message:'You loaded this page on ' + new Date()
+		}
+	})
+	
+	var app3 = new Vue({
+		el:'#app-3',
+		data:{
+			seen:true
+		}
+	})
+</script>
