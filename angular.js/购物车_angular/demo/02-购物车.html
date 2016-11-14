@@ -1,0 +1,108 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<title> New Document </title>  
+<style>
+	table{
+		width: 800px;
+		border-collapse:collapse;
+		margin: 200px auto;
+		font-family: "微软雅黑";
+	}
+	caption{
+		font-size:32px;
+		padding: 10px 0;
+		color: #333;
+	}
+	table td,
+	table th{
+		padding: 10px 20px;
+		border: 1px solid #ddd;
+	}
+	table th{
+		background: #efefef;
+	}
+	input {
+		width: 50px;
+		padding: 5px 0;
+		border: 1px solid #ddd;
+		text-align: center;
+	}
+	.total{
+		font-size: 24px;
+		color:#f00;
+	}
+</style>
+</head>  
+  
+ <body ng-app="myApp">  
+
+	<table ng-controller="firstController">
+		<tbody>
+			<caption>购物车</caption>
+			<tr>
+				<th>商品名</th>
+				<th>数量值</th>
+				<th>数量</th>
+				<th>价格</th>
+				<th>单品总价</th>
+				<th></th>
+			</tr>
+			<tr ng-repeat="(key,val) in goodsData">
+				<td width="20%" >{{val.name}}</td>
+				<td width="20%" align="center"><input  value="{{val.sum}}" ng-model="val.sum"/></td>
+				<td width="15%" align="center">{{val.sum}}</td>
+				<td width="15%" align="center">${{val.price}}</td>
+				<td width="15%" align="center">${{val.price * val.sum}}</td>
+				<td width="15%" align="center"><button ng-click="clear()">remove</button></td>
+			</tr>
+			<tr>
+				<td colspan="6">总共：<span class="total">
+					${{allPrice()}}
+				</span></td>
+			</tr>
+		</tbody>
+	</table>
+</body>  
+</html>  
+<script src="../angular.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var app = angular.module('myApp',[]);
+	app.controller('firstController',function($scope){
+		$scope.goodsData = [
+			{
+				name:"白驼山壮骨粉",
+				sum:"1",
+				price:"198"
+			},
+			{
+				name:"肾宝",
+				sum:"2",
+				price:"99"
+			},
+			{
+				name:"8848钛金手机",
+				sum:"1",
+				price:"12888"
+			},
+			{
+				name:"三星BOOM 7",
+				sum:"1",
+				price:"5688"
+			}
+		]
+		$scope.clear = function(){
+			$scope.goodsData.splice(this.key,1);
+		}
+		$scope.allPrice = function(){
+			var total = 0;
+			for (var i = 0; i <this.goodsData.length; i++) {
+				total+=this.goodsData[i].sum*this.goodsData[i].price;
+				
+			}
+			return total;
+		}
+	})
+	
+	
+</script>
