@@ -1,0 +1,237 @@
+<html>
+    <head>
+    	<meta charset="utf-8"/>
+        <script src="../angular.min.js" type="text/javascript" charset="utf-8"></script>
+        <style>
+        	body{
+        		background: #f5f5f5;
+        		font-family: "微软雅黑";
+        	}
+        	.addrForm {
+        		border-radius: 5px;
+        		border: 1px solid #ccc;
+        		background: #fff;
+        		width: 500px;
+        		margin: 200px auto 0;
+        		padding: 20px;
+        		
+        	}
+        	.addrForm h2 {
+        		border-bottom: 1px solid #eee;
+        		margin-bottom: 25px;
+        		padding-bottom: 20px;
+        	}
+        	.ipt-text {
+			    height: 34px;
+			    padding: 5px 8px;
+			    border: #ccc 1px solid;
+			    border-radius: 3px;
+			    outline-style: none;
+			    font-size: 14px;
+			    width: 390px;
+			    background-color: #fff;
+			}
+			.form-row{
+				margin-bottom: 25px;
+			}
+			.form-row:after{
+				content: '';
+				height: 0;
+				clear: both;
+				display: block;
+				overflow: hidden;
+			}
+			.form-row label {
+				float:left;
+				width: 100px;
+				text-align: right;
+				padding-right: 10px;
+				padding-top:5px;
+			}
+        	.sel-dropdown {
+			    position: relative;
+			    width: 192px;
+			    display: inline-block;
+			    vertical-align: top;
+			    float: left;
+			}
+			.sel-dropdown .sel-input {
+			    border: 1px solid #ccc;
+			    border-radius: 3px;
+			    background: #fff;
+			    height: 34px;
+			}
+			.sel-dropdown .sel-txt {
+			    border: 0;
+			    height: 34px;
+			    line-height: 34px;
+			    border-radius: 3px;
+			    text-indent: 8px;
+			    background: #fff;
+			    width: 100%;
+			    padding: 0;
+			    font-size: 14px;
+			    vertical-align: top;
+			}
+			.sel-dropdown .sel-toggle-ico {
+			    position: absolute;
+			    top: 10px;
+			    right: 10px;
+			    font-size: 20px;
+			    color: #cfd3d7;
+			    width:8px;
+			    height: 8px;
+			    border-left: 1px solid #ccc;
+			    border-bottom:1px solid #ccc;
+			    transform: rotate(-45deg);
+			}
+			.sel-dropdown .sel-menu {
+			    top: 35px;
+			    left: 0px;
+			    position: absolute;
+			    width: 100%;
+			    z-index: 1;
+			}
+			.sel-dropdown .sel-menu-list {
+			    border: 1px solid #ccc;
+			    padding: 5px 0;
+			    background: #fff;
+			    margin:0;
+			}
+			.sel-dropdown .sel-menu-list li {
+			    padding: 10px 8px;
+			    font-size: 14px;
+			    list-style: none;
+			}
+			.sel-dropdown .sel-menu-list li:hover {
+				background-color: #3199f4;
+				color: #fff;
+			}
+			.btn-submit {
+				border-radius: 3px;
+			    padding: 0 15px;
+			    height: 40px;
+			    line-height: 40px;
+			    text-align: center;
+			    background-color: #3199f4;
+			    display: inline-block;
+			    color: #fff;
+			    width:90px;
+			}
+        </style>
+        </head>
+        <body ng-app="myApp">
+
+            <div ng-controller="myCtrl">
+            	
+            	<form class="addrForm">
+            		<h2>表单-地区联动菜单</h2>
+            		<div class="form-row">
+            			<label>姓名：</label>
+            			<input class="ipt-text" value="" name="name" type="text" data-placeholder="请填写您的称呼" maxlength="255">
+            		</div>
+            		
+            		<div class="form-row">
+            			
+	            		<label>所在地区：</label>
+		                <div class="sel-dropdown" style="margin-right: 6px;">
+		                    <div class="sel-inner J_selTxt">
+		                        <div class="sel-input"><input type="text" class="sel-txt" value="{{pVal}}" data-rulenames="select" placeholder="请选择" readonly="" ng-click="plistShow=true"></div>
+		                        <span class="iconfont sel-toggle-ico"></span>
+		                    </div>
+		                    <div class="sel-menu J_selMenu">
+		                        <ul class="sel-menu-list" ng-show="plistShow">
+		                            <li value="{{item.value}}" ng-repeat="item in plist" ng-click="getCities(item.name, item.id)">{{item.name}}</li>
+		                        </ul>
+		                    </div>
+		                </div>
+		                
+						<div class="sel-dropdown">
+		                    <div class="sel-inner J_selTxt">
+		                        <div class="sel-input"><input type="text" class="sel-txt" value="{{cVal}}" placeholder="请选择"></div>
+		                        <span class="iconfont sel-toggle-ico"></span>
+		                    </div>
+		                    <div class="sel-menu J_selMenu">
+		                        <ul class="sel-menu-list" ng-show="clistShow">
+		                            <li value="{{item.value}}" ng-repeat="item in clist" ng-click="setcVal(item)">{{item.name}}</li>
+		                        </ul>
+		                    </div>
+		                </div>
+	                
+	                </div>
+	                
+	                <div class="form-row">
+	                	<label></label>
+	                	<span class="btn btn-submit" data-page="join">下一步</span>
+	                </div>
+                
+                </form>
+                
+			</div>
+			
+        </body>
+<script>
+var app = angular.module('myApp',[])
+app.controller('myCtrl', ['$scope', function ($scope) {
+
+    var data = [{
+        name: '浙江',
+        id: 10,
+        cities: [{
+            name: '杭州',
+            id: 100
+        }, {
+            name: '宁波',
+            id: 101
+        }, {
+            name: '温州',
+            id: 102
+        }]
+    }, {
+        name: '广东',
+        id: 20,
+        cities: [{
+            name: '广州',
+            id: 200
+        }, {
+            name: '深圳',
+            id: 201
+        }, {
+            name: '佛山',
+            id: 202
+        }]
+    }, {
+        name: '山东',
+        id: 30,
+        cities: [{
+            name: '济南',
+            id: 301
+        }, {
+            name: '青岛',
+            id: 302
+        }, {
+            name: '烟台',
+            id: 303
+        }]
+    }];
+
+	$scope.plist = data;
+    $scope.getCities = function(name,id){
+    	$scope.plistShow = false;
+    	$scope.pVal = name;
+    	
+    	$scope.clistShow = true;
+    	
+    	$scope.cVal = "";
+    	var index = this.$index;
+    	
+    	$scope.clist = data[index].cities;
+    	
+    	$scope.setcVal  = function (city){
+    		$scope.cVal = city.name;
+    		$scope.clistShow = false;
+    	}
+    }
+}]);
+</script>       
+</html>
